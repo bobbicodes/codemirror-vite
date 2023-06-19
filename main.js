@@ -1,9 +1,8 @@
 import './style.css'
-import {EditorView, basicSetup, minimalSetup} from 'codemirror'
+import {EditorView, basicSetup} from 'codemirror'
 import {parser, props} from "@nextjournal/lezer-clojure"
-import {NodeType} from "@lezer/common"
 import {styleTags, tags} from "@lezer/highlight"
-import {indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, TreeIndentContext} from "@codemirror/language"
+import {indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport} from "@codemirror/language"
 
 const {coll} = props
 
