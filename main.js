@@ -3,7 +3,7 @@ import { EditorView, basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
-import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport } from "@codemirror/language"
+import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, syntaxTree } from "@codemirror/language"
 import { test } from "./eval-region"
 
 console.log(test)
@@ -58,10 +58,8 @@ export function clojure() {
   return new LanguageSupport(clojureLanguage)
 }
 
-const doc = `(map inc (range 8))`
-
 let state = EditorState.create({
-  doc: doc,
+  doc: `(map inc (range 8))`,
   extensions: [basicSetup, clojure()]
 })
 
@@ -70,4 +68,6 @@ new EditorView({
   parent: document.querySelector('#app')
 }).focus()
 
-console.log(state)
+
+
+console.log(syntaxTree(state))
