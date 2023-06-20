@@ -1,5 +1,6 @@
 import './style.css'
 import { EditorView, basicSetup } from 'codemirror'
+import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
 import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport } from "@codemirror/language"
@@ -59,8 +60,14 @@ export function clojure() {
 
 const doc = `(map inc (range 8))`
 
-new EditorView({
+let state = EditorState.create({
   doc: doc,
-  extensions: [basicSetup, clojure()],
+  extensions: [basicSetup, clojure()]
+})
+
+new EditorView({
+  state: state,
   parent: document.querySelector('#app')
 }).focus()
+
+console.log(state)
