@@ -3,6 +3,7 @@ import { EditorView, basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
+import { Tree } from '@lezer/common'
 import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, syntaxTree } from "@codemirror/language"
 import { test } from "./eval-region"
 
@@ -68,6 +69,15 @@ new EditorView({
   parent: document.querySelector('#app')
 }).focus()
 
+function tree(state, pos, dir) {
+  switch (arguments["length"]) {
+    case 1:
+      return syntaxTree(state);
+    case 2:
+      return syntaxTree(state).resolveInner(pos);
+    case 3:
+      return syntaxTree(state).resolveInner(pos, dir);
+  }
+}
 
-
-console.log(syntaxTree(state))
+console.log(tree(state, 0))
