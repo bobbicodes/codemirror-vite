@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.shadow-cljs/
+public/js/cljs-runtime/
+.calva/output-window/output.calva-repl

@@ -1,0 +1,7 @@
+{:source-paths ["src"]
+ :dev-http {8000 "public"}
+ :builds
+ {:app
+  {:target :esm
+   :output-dir "public/js"
+   :modules {:main {:exports {hello lang-clojure-eval.main/hello}}}}}}
