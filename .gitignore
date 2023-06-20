@@ -25,3 +25,5 @@ dist-ssr
 .shadow-cljs/
 public/js/cljs-runtime/
 .calva/output-window/output.calva-repl
+*.cache
+.cpcache/
