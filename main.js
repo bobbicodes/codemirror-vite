@@ -69,13 +69,8 @@ function tree(state, pos, dir) {
   }
 }
 
-/* function evalCell(onResult, view) {
-  onResult(view.state.doc.text.join(" ").evalString())
-  return true
-} */
-
-function printResult(state, dispatch) {
-  console.log(evalString(editorState.doc.text.join(" ")))
+function printResult(view) {
+  console.log(evalString(view.state.doc.text.join(" ")))
   return true
 }
 
@@ -96,8 +91,6 @@ new EditorView({
   state: editorState,
   parent: document.querySelector('#app')
 }).focus()
-
-
 
 //console.log(tree(state, 0))
 //console.log(evalCell())
