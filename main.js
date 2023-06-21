@@ -7,8 +7,6 @@ import { Tree } from '@lezer/common'
 import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, syntaxTree } from "@codemirror/language"
 import { evalString } from "./sci"
 
-console.log(evalString("(range 5)"))
-
 const { coll } = props
 
 export const clojureLanguage = LRLanguage.define({
@@ -80,4 +78,5 @@ function tree(state, pos, dir) {
   }
 }
 
-console.log(tree(state, 0))
+//console.log(tree(state, 0))
+console.log(evalString(state.doc.text[0]))
