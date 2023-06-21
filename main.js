@@ -1,5 +1,6 @@
 import './style.css'
 import { EditorView, basicSetup } from 'codemirror'
+import { keymap } from '@codemirror/view'
 import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
@@ -57,17 +58,6 @@ export function clojure() {
   return new LanguageSupport(clojureLanguage)
 }
 
-let state = EditorState.create({
-  doc: `(map inc
-(range 8))`,
-  extensions: [basicSetup, clojure()]
-})
-
-new EditorView({
-  state: state,
-  parent: document.querySelector('#app')
-}).focus()
-
 function tree(state, pos, dir) {
   switch (arguments["length"]) {
     case 1:
@@ -79,10 +69,36 @@ function tree(state, pos, dir) {
   }
 }
 
-function evalCell() {
-  return evalString(state.doc.text.join(" "))
+/* function evalCell(onResult, view) {
+  onResult(view.state.doc.text.join(" ").evalString())
+  return true
+} */
+
+function printResult(state, dispatch) {
+  console.log(evalString(editorState.doc.text.join(" ")))
+  return true
 }
 
+function evalExtension() {
+  return keymap.of([{
+    key: "Shift-Enter",
+    run: printResult,
+  }])
+}
+
+let editorState = EditorState.create({
+  doc: `(map inc
+(range 8))`,
+  extensions: [basicSetup, clojure(), evalExtension()]
+})
+
+new EditorView({
+  state: editorState,
+  parent: document.querySelector('#app')
+}).focus()
+
+
+
 //console.log(tree(state, 0))
-console.log(evalCell())
+//console.log(evalCell())
 //console.log(state.doc.text.join(" "))
