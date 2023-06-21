@@ -5,4 +5,4 @@
  {:app
   {:target :esm
    :output-dir "public/js"
-   :modules {:main {:exports {hello lang-clojure-eval.main/hello}}}}}}
+   :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string}}}}}}

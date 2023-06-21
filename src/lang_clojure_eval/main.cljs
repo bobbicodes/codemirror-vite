@@ -1,7 +1,5 @@
 (ns lang-clojure-eval.main
-  (:require 
-   [lang-clojure-eval.eval-region]
-   [lang-clojure-eval.node]))
+  (:require [sci.core :as sci]))
 
-(defn hello []
-  (js/console.log "hello world"))
+(defn eval-string [s]
+  (str (sci/eval-string s)))
