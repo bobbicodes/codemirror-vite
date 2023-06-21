@@ -58,7 +58,8 @@ export function clojure() {
 }
 
 let state = EditorState.create({
-  doc: `(map inc (range 8))`,
+  doc: `(map inc
+(range 8))`,
   extensions: [basicSetup, clojure()]
 })
 
@@ -78,5 +79,10 @@ function tree(state, pos, dir) {
   }
 }
 
+function evalCell() {
+  return evalString(state.doc.text.join(" "))
+}
+
 //console.log(tree(state, 0))
-console.log(evalString(state.doc.text[0]))
+console.log(evalCell())
+//console.log(state.doc.text.join(" "))
