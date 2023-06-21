@@ -5,9 +5,9 @@ import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
 import { Tree } from '@lezer/common'
 import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, syntaxTree } from "@codemirror/language"
-import { test } from "./eval-region"
+import { evalString } from "./sci"
 
-console.log(test)
+console.log(evalString("(range 5)"))
 
 const { coll } = props
 
