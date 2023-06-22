@@ -78,8 +78,24 @@ function mainSelection(state) {
   return state.selection.asSingle().ranges[0]
 }
 
+function nearestTouching(state, pos, dir) {
+  const L = tree(state, pos, -1)
+  const R = tree(state, pos, 1)
+  const mid = tree(state, pos)
+
+  return mid
+}
+
+function nodeAtCursor(state, from) {
+  return nearestTouching(state, from, -1)
+}
+
+function cursorNodeString(state) {
+  return nodeAtCursor(state)
+}
+
 function evalAtCursor(view) {
-  console.log(mainSelection(view.state))
+  console.log(nearestTouching(view.state, ))
   return true
 }
 
