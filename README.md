@@ -1,6 +1,6 @@
 # lang-clojure-eval
 
-A language provider based on the [Lezer Clojure](https://github.com/nextjournal/lezer-clojure) parser, to be extended with inline-evaluation support.
+A language provider based on the [Lezer Clojure](https://github.com/nextjournal/lezer-clojure) parser, with inline-evaluation support via the [Small Clojure Interpreter (SCI)](https://github.com/babashka/sci).
 
 ## Demo
 

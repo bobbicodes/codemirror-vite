@@ -77,7 +77,7 @@ function printResult(view) {
 function evalExtension() {
   return Prec.highest(keymap.of([{
     key: "Ctrl-Enter",
-    run: printResult,
+    run: printResult
   }]))
 }
 
@@ -92,6 +92,6 @@ new EditorView({
   parent: document.querySelector('#app')
 }).focus()
 
-//console.log(tree(state, 0))
+//console.log(tree(editorState, 0))
 //console.log(evalCell())
-//console.log(state.doc.text.join(" "))
+//console.log(editorState.doc.text.join(" "))
