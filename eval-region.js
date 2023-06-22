@@ -56,6 +56,16 @@ function nearestTouching(state, pos, dir) {
     return mid
 }
 
+function isTerminalType(nodeType) {
+    if (isTopType(nodeType || nodeType.prefixCollProp.prop() ||
+    nodeType.collProp.prop() || nodeType.name == "Meta" ||
+    nodeType.name == "TaggedLiteral" || nodeType.name == "ConstructorCall")) {
+        return false
+    } else {
+        return true
+    }
+}
+
 function nodeAtCursor(state, from) {
     return nearestTouching(state, from, -1)
 }
