@@ -11,6 +11,6 @@ npm run dev
 
 ## Credits
 
-- The [lang-clojure](https://github.com/nextjournal/lang-clojure/) project includes the Lezer parser extended with highlighting and indentation information.
-- Evaluation functionality ported from Nextjurnal's [clojure-mode](https://github.com/nextjournal/clojure-mode/tree/main).
+- The [lang-clojure](https://github.com/nextjournal/lang-clojure/) extension includes the Lezer parser extended with highlighting and indentation information.
+- Evaluation functionality ported from Nextjurnal's [clojure-mode](https://github.com/nextjournal/clojure-mode/).
 - [SCI](https://github.com/babashka/sci) compiled to ESM with [shadow-cljs](https://github.com/thheller/shadow-cljs).
