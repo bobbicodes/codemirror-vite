@@ -69,16 +69,26 @@ function tree(state, pos, dir) {
   }
 }
 
-function printResult(view) {
+function evalCell(view) {
   console.log(evalString(view.state.doc.text.join(" ")))
   return true
 }
 
+function mainSelection(state) {
+  return state.selection.asSingle().ranges[0]
+}
+
+function evalAtCursor(view) {
+  console.log(mainSelection(view.state))
+  return true
+}
+
 function evalExtension() {
-  return Prec.highest(keymap.of([{
-    key: "Ctrl-Enter",
-    run: printResult
-  }]))
+  return Prec.highest(keymap.of(
+    [{key: "Shift-Enter",
+      run: evalCell},
+      {key: "Ctrl-Enter",
+      run: evalAtCursor}]))
 }
 
 let editorState = EditorState.create({
