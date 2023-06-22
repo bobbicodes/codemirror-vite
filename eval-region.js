@@ -1,13 +1,30 @@
 import { Prec } from '@codemirror/state'
 import { keymap } from '@codemirror/view'
 import { syntaxTree } from "@codemirror/language"
+import { props } from "@nextjournal/lezer-clojure"
 import { evalString } from "./sci"
+import { NodeProp } from "@lezer/common"
+
+// Node props are marked in the grammar and distinguish categories of nodes
+
+// primitive collection
+const collProp = props.coll
+// prefix collection - a prefix token that wraps the next element
+const prefixCollProp = props.prefixColl
+// the prefix edge itself
+const prefixEdgeProp = props.prefixEdge
+// prefix form - pair of [metadata, target]
+const prefixContainerProp = props.prefixContainer
+// edges at the beginning/end of collections, + "same" edges (string quotes)
+const startEdgeProp = NodeProp.closedBy
+const endEdgeProp = NodeProp.openedBy
+const sameEdgeProp = props.sameEdge
 
 function up(node) {
     return node.parent;
 }
 
-function topType(nodeType) {
+function isTopType(nodeType) {
     nodeType.isTop;
 }
 
