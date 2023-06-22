@@ -4,7 +4,7 @@ import { syntaxTree } from "@codemirror/language"
 import { props } from "@nextjournal/lezer-clojure"
 import { evalString } from "./sci"
 import { NodeProp } from "@lezer/common"
-import { nodeAtCursor } from "./node"
+import { nodeAtCursor } from "./nodes"
 
 // Node props are marked in the grammar and distinguish categories of nodes
 
