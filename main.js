@@ -1,7 +1,7 @@
 import './style.css'
 import { EditorView, basicSetup } from 'codemirror'
 import { keymap } from '@codemirror/view'
-import { EditorState } from '@codemirror/state'
+import { EditorState, Prec } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
 import { Tree } from '@lezer/common'
@@ -75,10 +75,10 @@ function printResult(view) {
 }
 
 function evalExtension() {
-  return keymap.of([{
-    key: "Shift-Enter",
+  return Prec.highest(keymap.of([{
+    key: "Ctrl-Enter",
     run: printResult,
-  }])
+  }]))
 }
 
 let editorState = EditorState.create({
