@@ -6,7 +6,7 @@ import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
 import { Tree } from '@lezer/common'
 import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, syntaxTree } from "@codemirror/language"
-import { evalString } from "./sci"
+import { evalExtension } from "./eval-region"
 
 const { coll } = props
 
@@ -56,55 +56,6 @@ export const clojureLanguage = LRLanguage.define({
 
 export function clojure() {
   return new LanguageSupport(clojureLanguage)
-}
-
-function tree(state, pos, dir) {
-  switch (arguments["length"]) {
-    case 1:
-      return syntaxTree(state);
-    case 2:
-      return syntaxTree(state).resolveInner(pos);
-    case 3:
-      return syntaxTree(state).resolveInner(pos, dir);
-  }
-}
-
-function evalCell(view) {
-  console.log(evalString(view.state.doc.text.join(" ")))
-  return true
-}
-
-function mainSelection(state) {
-  return state.selection.asSingle().ranges[0]
-}
-
-function nearestTouching(state, pos, dir) {
-  const L = tree(state, pos, -1)
-  const R = tree(state, pos, 1)
-  const mid = tree(state, pos)
-
-  return mid
-}
-
-function nodeAtCursor(state, from) {
-  return nearestTouching(state, from, -1)
-}
-
-function cursorNodeString(state) {
-  return nodeAtCursor(state)
-}
-
-function evalAtCursor(view) {
-  console.log(nearestTouching(view.state, ))
-  return true
-}
-
-function evalExtension() {
-  return Prec.highest(keymap.of(
-    [{key: "Shift-Enter",
-      run: evalCell},
-      {key: "Ctrl-Enter",
-      run: evalAtCursor}]))
 }
 
 let editorState = EditorState.create({
