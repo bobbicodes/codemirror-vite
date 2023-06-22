@@ -9,6 +9,14 @@ npm install
 npm run dev
 ```
 
+## Dev
+
+The library for generating the ESM module for parsing Lezer syntax trees lives at https://github.com/bobbicodes/lezer-shadow. SCI is compiled with this project:
+
+```bash
+npx shadow-cljs release sci
+```
+
 ## Credits
 
 - The [lang-clojure](https://github.com/nextjournal/lang-clojure/) extension provides the Lezer parser, highlighting and formatting information.
