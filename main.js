@@ -57,7 +57,7 @@ export function clojure() {
 }
 
 let editorState = EditorState.create({
-  doc: `(range 8)`,
+  doc: `(map inc (range 5))`,
   extensions: [basicSetup, clojure(), evalExtension()]
 })
 

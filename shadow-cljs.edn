@@ -5,5 +5,5 @@
  {:app
   {:target :esm
    :output-dir "public/js"
-   :modules {:sci {:init-fn lang-clojure-eval.sci/init
-                   :exports {evalString lang-clojure-eval.main/eval-string}}}}}}
+   :modules {#_#_:sci {:exports {evalString lang-clojure-eval.main/eval-string}}
+             :eval {:exports {nodeAtCursor lang-clojure-eval.eval/node-at-cursor}}}}}}

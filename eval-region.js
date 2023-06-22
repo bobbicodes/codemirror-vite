@@ -4,6 +4,7 @@ import { syntaxTree } from "@codemirror/language"
 import { props } from "@nextjournal/lezer-clojure"
 import { evalString } from "./sci"
 import { NodeProp } from "@lezer/common"
+import { nodeAtCursor } from "./node"
 
 // Node props are marked in the grammar and distinguish categories of nodes
 
@@ -25,15 +26,15 @@ function up(node) {
 }
 
 function isTopType(nodeType) {
-    nodeType.isTop;
+    return nodeType.isTop;
 }
 
 function isTop(node) {
-    isTopType(node.type);
+    return isTopType(node.type);
 }
 
 function evalCell(view) {
-    console.log(evalString(view.state.doc.text.join(" ")))
+    console.log("evalCell>", evalString(view.state.doc.text.join(" ")))
     return true
 }
 
@@ -56,8 +57,8 @@ function nearestTouching(state, pos, dir) {
     const L = tree(state, pos, -1)
     const R = tree(state, pos, 1)
     const mid = tree(state, pos)
-
-    return mid
+    //console.log(L)
+    return L
 }
 
 function isTerminalType(nodeType) {
@@ -93,15 +94,29 @@ function children(parent, from, dir) {
     return parent
 }
 
-// Return node or its highest ancestor that starts or ends at the cursor position
-function uppermostEdge(pos, node) {
-    return isTop(node)
+function parents(node, p) {
+    if (isTop(node)) return p;
+    return parents(up(node), p.concat(node));
 }
 
-function nodeAtCursor(state, from) {
-    const n = nearestTouching(state, from, 1)
-    return mainSelection(state).from
+// Return node or its highest ancestor that starts or ends at the cursor position
+function uppermostEdge(pos, node) {
+    const p = parents(node, [])
+    return node
+    for (let index = 0; index < p.length; index++) {
+        if (p[index].from === pos || p[index].to === pos) {
+            return p[index]
+        }
+    }
 }
+
+/* function nodeAtCursor(state) {
+    const pos =  mainSelection(state).from
+    const n = nearestTouching(state, pos, -1)
+    console.log("Parent nodes:", parents(n, []))
+    //const u =  uppermostEdge(pos, n)
+    return n
+} */
 
 function rangeStr(state, selection) {
     return state.doc.slice(selection.from, selection.to).toString()
@@ -112,9 +127,9 @@ function cursorNodeString(state) {
 }
 
 function evalAtCursor(view) {
-    //console.log(cursorNodeString(view.state))
-    console.log(nodeAtCursor(view.state))
-    //console.log("evalAtCursor>", cursorNodeString(view.state))
+    console.log(cursorNodeString(view.state))
+    //console.log(nodeAtCursor(view.state))
+    console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
     return true
 }
 
