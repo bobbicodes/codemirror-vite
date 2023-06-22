@@ -43,12 +43,16 @@ function nodeAtCursor(state, from) {
     return nearestTouching(state, from, -1)
 }
 
+function rangeStr(state, selection) {
+    return state.doc.slice(selection.from, selection.to).toString()
+}
+
 function cursorNodeString(state) {
-    return nodeAtCursor(state)
+    return rangeStr(state, nodeAtCursor(state))
 }
 
 function evalAtCursor(view) {
-    console.log(nearestTouching(view.state,))
+    console.log(cursorNodeString(view.state))
     return true
 }
 
