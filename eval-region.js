@@ -28,6 +28,10 @@ function isTopType(nodeType) {
     nodeType.isTop;
 }
 
+function isTop(node) {
+    isTopType(node.type);
+}
+
 function evalCell(view) {
     console.log(evalString(view.state.doc.text.join(" ")))
     return true
@@ -66,8 +70,37 @@ function isTerminalType(nodeType) {
     }
 }
 
+function childDir(parent, from, dir) {
+    switch (dir) {
+        case 1:
+            return parent.childAfter(from)
+        case -1:
+            return parent.childBefore(from)
+    }
+}
+
+function childSide(child, dir) {
+    switch (dir) {
+        case 1:
+            return child.to
+        case -1:
+            return child.from
+    }
+}
+
+function children(parent, from, dir) {
+    let child = childDir(parent, from, dir)
+    return parent
+}
+
+// Return node or its highest ancestor that starts or ends at the cursor position
+function uppermostEdge(pos, node) {
+    return isTop(node)
+}
+
 function nodeAtCursor(state, from) {
-    return nearestTouching(state, from, -1)
+    const n = nearestTouching(state, from, 1)
+    return mainSelection(state).from
 }
 
 function rangeStr(state, selection) {
@@ -79,7 +112,9 @@ function cursorNodeString(state) {
 }
 
 function evalAtCursor(view) {
-    console.log(cursorNodeString(view.state))
+    //console.log(cursorNodeString(view.state))
+    console.log(nodeAtCursor(view.state))
+    //console.log("evalAtCursor>", cursorNodeString(view.state))
     return true
 }
 
