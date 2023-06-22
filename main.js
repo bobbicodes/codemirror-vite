@@ -1,11 +1,9 @@
 import './style.css'
 import { EditorView, basicSetup } from 'codemirror'
-import { keymap } from '@codemirror/view'
-import { EditorState, Prec } from '@codemirror/state'
+import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
-import { Tree } from '@lezer/common'
-import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport, syntaxTree } from "@codemirror/language"
+import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport } from "@codemirror/language"
 import { evalExtension } from "./eval-region"
 
 const { coll } = props
