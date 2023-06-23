@@ -57,7 +57,6 @@ function nearestTouching(state, pos) {
     const L = tree(state, pos, -1)
     const R = tree(state, pos, 1)
     const mid = tree(state, pos)
-    //console.log(L)
     return L
 }
 
@@ -101,21 +100,29 @@ function parents(node, p) {
 
 // Return node or its highest ancestor that starts or ends at the cursor position
 function uppermostEdge(pos, node) {
-    const p = parents(node, [])
-    return node
-    for (let index = 0; index < p.length; index++) {
-        if (p[index].from === pos || p[index].to === pos) {
-            return p[index]
-        }
+    let n = node
+    while (!isTop(n) && (pos === n.to && pos === node.to) ||
+                        (pos === n.from && pos === node.from)) {              
+        n = up(n)
+        break
     }
+    if (!n) {
+        return node
+    }
+    return n
+}
+
+function isTerminal(node, pos) {
+    return isTerminalType(node.type) ||
+           pos === node.from || pos === node.to
 }
 
 function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
-    console.log("Parent nodes:", parents(n, []))
+    //console.log("Parent nodes:", parents(n, []))
     //const u =  uppermostEdge(pos, n)
-    return n
+    return uppermostEdge(pos, n)
 }
 
 function rangeStr(state, selection) {
