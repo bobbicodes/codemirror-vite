@@ -120,8 +120,6 @@ function isTerminal(node, pos) {
 function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
-    //console.log("Parent nodes:", parents(n, []))
-    //const u =  uppermostEdge(pos, n)
     return uppermostEdge(pos, n)
 }
 
@@ -135,7 +133,6 @@ function cursorNodeString(state) {
 
 function evalAtCursor(view) {
     console.log(cursorNodeString(view.state))
-    //console.log(nodeAtCursor(view.state))
     console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
     return true
 }
