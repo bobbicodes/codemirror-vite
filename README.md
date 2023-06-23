@@ -12,7 +12,7 @@ Not working yet, but making steady progress. There is a [live demo](https://bobb
 - [ ] Eval-at-cursor
 - [ ] Eval top-level form
 - [ ] Display results inline
-- [ ] Implement clear-keys
+- [ ] Implement clear-events
 
 ## Run demo locally
 
