@@ -98,18 +98,24 @@ function parents(node, p) {
     return parents(up(node), p.concat(node));
 }
 
+function rangeStr(state, selection) {
+    return state.doc.slice(selection.from, selection.to).toString()
+}
+
 // Return node or its highest ancestor that starts or ends at the cursor position
 function uppermostEdge(pos, node) {
+    let parents = []
     let n = node
-    while (!isTop(n) && (pos === n.to && pos === node.to) ||
-                        (pos === n.from && pos === node.from)) {              
+    while ((!isTop(n) && (pos === n.to && pos === node.to) ||
+                        (pos === n.from && pos === node.from))) {              
+        parents.concat(n)
         n = up(n)
-        break
     }
-    if (!n) {
+    console.log("parents:", parents)
+    if ((parents.slice(-1)) !== null) {
         return node
     }
-    return n
+    return parents.slice(-1)
 }
 
 function isTerminal(node, pos) {
@@ -120,11 +126,10 @@ function isTerminal(node, pos) {
 function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
+    const u = uppermostEdge(pos, n)
+    console.log("touching:", state.doc.slice(n.from, n.to).toString())
+    console.log("upper:", state.doc.slice(u.from, u.to).toString())
     return uppermostEdge(pos, n)
-}
-
-function rangeStr(state, selection) {
-    return state.doc.slice(selection.from, selection.to).toString()
 }
 
 function cursorNodeString(state) {
