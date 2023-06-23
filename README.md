@@ -2,7 +2,11 @@
 
 A Codemirror 6 language extension based on the [Lezer Clojure](https://github.com/nextjournal/lezer-clojure) parser, with inline-evaluation support via the [Small Clojure Interpreter (SCI)](https://github.com/babashka/sci).
 
-## Demo
+## Status
+
+Not working yet, but making steady progress. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch.
+
+## Run demo locally
 
 ```bash
 npm install
@@ -11,7 +15,7 @@ npm run dev
 
 ## Dev
 
-The library for generating the ESM module for parsing Lezer syntax trees lives at https://github.com/bobbicodes/lezer-shadow. SCI is compiled with this project:
+To compile sci.js from the Clojurescript source:
 
 ```bash
 npx shadow-cljs release sci
