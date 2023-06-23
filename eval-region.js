@@ -4,7 +4,7 @@ import { syntaxTree } from "@codemirror/language"
 import { props } from "@nextjournal/lezer-clojure"
 import { evalString } from "./sci"
 import { NodeProp } from "@lezer/common"
-import { nodeAtCursor } from "./nodes"
+//import { nodeAtCursor } from "./nodes"
 
 // Node props are marked in the grammar and distinguish categories of nodes
 
@@ -53,7 +53,7 @@ function tree(state, pos, dir) {
     }
 }
 
-function nearestTouching(state, pos, dir) {
+function nearestTouching(state, pos) {
     const L = tree(state, pos, -1)
     const R = tree(state, pos, 1)
     const mid = tree(state, pos)
@@ -110,13 +110,13 @@ function uppermostEdge(pos, node) {
     }
 }
 
-/* function nodeAtCursor(state) {
+function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
-    const n = nearestTouching(state, pos, -1)
+    const n = nearestTouching(state, pos)
     console.log("Parent nodes:", parents(n, []))
     //const u =  uppermostEdge(pos, n)
     return n
-} */
+}
 
 function rangeStr(state, selection) {
     return state.doc.slice(selection.from, selection.to).toString()
