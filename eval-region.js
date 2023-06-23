@@ -106,8 +106,8 @@ function rangeStr(state, selection) {
 function uppermostEdge(pos, node) {
     let parents = []
     let n = node
-    while ((!isTop(n) && (pos === n.to && pos === node.to) ||
-                        (pos === n.from && pos === node.from))) {              
+    while (!isTop(n) && (pos === n.to && pos === node.to) ||
+                        (pos === n.from && pos === node.from)) {              
         parents.concat(n)
         n = up(n)
     }
