@@ -4,7 +4,15 @@ A Codemirror 6 language extension based on the [Lezer Clojure](https://github.co
 
 ## Status
 
-Not working yet, but making steady progress. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch.
+Not working yet, but making steady progress. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch. The architecture is sound, eval-cell works, but the functions for selecting regions are incomplete.
+
+- [x] Implement Lezer parser
+- [x] Hook up Clojure interpreter
+- [x] Eval-cell
+- [ ] Eval-at-cursor
+- [ ] Eval top-level form
+- [ ] Display results inline
+- [ ] Implement clear-keys
 
 ## Run demo locally
 
