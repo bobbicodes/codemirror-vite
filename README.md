@@ -14,6 +14,8 @@ Not ready to ship yet, but making steady progress. There is a [live demo](https:
 - [ ] Display results inline
 - [ ] Implement clear-events
 
+Eval at cursor is working, but currently only for simple forms. Forms with prefixes, eg. `#(+ 1 %)` not yet implemented.
+
 ## Run demo locally
 
 ```bash
