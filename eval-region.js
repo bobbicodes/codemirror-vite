@@ -102,21 +102,44 @@ function rangeStr(state, selection) {
     return state.doc.slice(selection.from, selection.to).toString()
 }
 
+function nodeRangeStr(state, node) {
+    return state.doc.slice(node.from, node.to).toString()
+}
+
+function filterParents(pos, node, p) {
+    const result = p.filter(n => pos == n.to && pos == node.to);
+    return result
+}
+
+function highestParent(pos, node) {
+    const p = parents(node, [])
+    return parents(node, [])[parents(node, []).length - 1]
+}
+
 // Return node or its highest ancestor that starts or ends at the cursor position
-function uppermostEdge(pos, node) {
-    let parents = []
+ function uppermostEdge(pos, node) {
+    console.log("highest parent:", highestParent(pos, node).from)
+    console.log("filtered:", filterParents(pos, node, parents(node, [])))
+    parents(node, [])
+    let p = []
     let n = node
-    while (!isTop(n) && (pos === n.to && pos === node.to) ||
-                        (pos === n.from && pos === node.from)) {              
-        parents.concat(n)
+    while (!isTop(n) && ((pos === n.to && pos === node.to) ||
+                        (pos === n.from && pos === node.from))) {              
+        p.concat(n)
         n = up(n)
     }
-    console.log("parents:", parents)
-    if ((parents.slice(-1)) !== null) {
+    //console.log("parents:", parents)
+    if ((p.slice(-1)) !== null) {
         return node
     }
-    return parents.slice(-1)
+    return p.slice(-1)
 }
+
+
+
+/* function uppermostEdge(pos, node) {
+    return up(node)
+} */
 
 function isTerminal(node, pos) {
     return isTerminalType(node.type) ||
@@ -127,8 +150,9 @@ function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
     const u = uppermostEdge(pos, n)
-    console.log("touching:", state.doc.slice(n.from, n.to).toString())
-    console.log("upper:", state.doc.slice(u.from, u.to).toString())
+    //console.log("parents:", parents(n, []))
+    console.log("touching:", nodeRangeStr(state, n))
+    console.log("upper:", nodeRangeStr(state, u))
     return uppermostEdge(pos, n)
 }
 
@@ -138,7 +162,7 @@ function cursorNodeString(state) {
 
 function evalAtCursor(view) {
     console.log(cursorNodeString(view.state))
-    console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
+    //console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
     return true
 }
 

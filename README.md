@@ -4,7 +4,7 @@ A Codemirror 6 language extension based on the [Lezer Clojure](https://github.co
 
 ## Status
 
-Not working yet, but making steady progress. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch. The architecture is sound, eval-cell works, but the functions for selecting regions are incomplete. Currently eval results are logged to the console, but when finished will be integrated into the main editor UI. I might consider displaying it via an annotation or something, but my current plan is to dispatch actual changes to the editor text, which will immediately revert back on the next user event, with the exception of selecting and copying the results which would be good to allow.
+Not ready to ship yet, but making steady progress. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch. The architecture is sound, eval-cell works, but the functions for selecting regions are incomplete. Currently eval results are logged to the console, but when finished will be integrated into the main editor UI. I might consider displaying it via an annotation or something, but my current plan is to dispatch actual changes to the editor text, which will immediately revert back on the next user event, with the exception of selecting and copying the results which would be good to allow.
 
 - [x] Implement Lezer parser
 - [x] Hook up Clojure interpreter
