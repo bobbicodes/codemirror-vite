@@ -122,7 +122,12 @@ function nodeAtCursor(state) {
 function topLevelNode(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
-    return parents(n, [])[parents(n, []).length - 1]
+    const p = parents(n, [])
+    if (p.length === 0) {
+        return nodeAtCursor(state)
+    } else {
+        return p[p.length - 1]
+    }
 }
 
 function cursorNodeString(state) {
