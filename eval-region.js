@@ -116,30 +116,11 @@ function highestParent(pos, node) {
     return parents(node, [])[parents(node, []).length - 1]
 }
 
-// Return node or its highest ancestor that starts or ends at the cursor position
+// Return node or its highest parent that ends at the cursor position
  function uppermostEdge(pos, node) {
-    console.log("highest parent:", highestParent(pos, node).from)
-    console.log("filtered:", filterParents(pos, node, parents(node, [])))
-    parents(node, [])
-    let p = []
-    let n = node
-    while (!isTop(n) && ((pos === n.to && pos === node.to) ||
-                        (pos === n.from && pos === node.from))) {              
-        p.concat(n)
-        n = up(n)
-    }
-    //console.log("parents:", parents)
-    if ((p.slice(-1)) !== null) {
-        return node
-    }
-    return p.slice(-1)
+   const p = filterParents(pos, node, parents(node, []))
+   return p[p.length - 1]
 }
-
-
-
-/* function uppermostEdge(pos, node) {
-    return up(node)
-} */
 
 function isTerminal(node, pos) {
     return isTerminalType(node.type) ||
