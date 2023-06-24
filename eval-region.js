@@ -112,14 +112,13 @@ function filterParents(pos, node, p) {
 }
 
 function highestParent(pos, node) {
-    const p = parents(node, [])
-    return parents(node, [])[parents(node, []).length - 1]
+    const p = filterParents(pos, node, parents(node, []))
+    return p[p.length - 1]
 }
 
 // Return node or its highest parent that ends at the cursor position
  function uppermostEdge(pos, node) {
-   const p = filterParents(pos, node, parents(node, []))
-   return p[p.length - 1]
+   return highestParent(pos, node) || node
 }
 
 function isTerminal(node, pos) {
@@ -131,9 +130,6 @@ function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
     const u = uppermostEdge(pos, n)
-    //console.log("parents:", parents(n, []))
-    //console.log("touching:", nodeRangeStr(state, n))
-    //console.log("upper:", nodeRangeStr(state, u))
     return uppermostEdge(pos, n)
 }
 
@@ -142,7 +138,6 @@ function cursorNodeString(state) {
 }
 
 function evalAtCursor(view) {
-    //console.log(cursorNodeString(view.state))
     console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
     return true
 }
