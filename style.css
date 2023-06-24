@@ -2,7 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
   color: rgba(255, 230, 0, 0.87);
-  background-color: #290624;
+  background-color: #2c0236;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -12,7 +12,7 @@
 }
 
 #app {
-  max-width: 280px;
+  max-width: 600px;
   margin: 0 auto;
   font-size: x-large;
 }

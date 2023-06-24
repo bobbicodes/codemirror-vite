@@ -121,8 +121,7 @@ function nodeAtCursor(state) {
 
 function topLevelNode(state) {
     const pos =  mainSelection(state).from
-    const n = nearestTouching(state, pos)
-    const p = parents(n, [])
+    const p = parents(nearestTouching(state, pos), [])
     if (p.length === 0) {
         return nodeAtCursor(state)
     } else {
@@ -146,6 +145,21 @@ function evalAtCursor(view) {
 function evalTopLevel(view) {
     console.log("evalTopLevel>", evalString(topLevelString(view.state)))
     return true
+}
+
+function isLinux() {
+    if (navigator.userAgent.match(/(Linux)|(X11)/g) === null) {
+        return false
+    }
+    return true
+}
+
+function isMac() {
+    if (!isLinux &&
+        navigator.userAgent.match(/(Mac)|(iPhone)|(iPad)|(iPod)/g) === null) {
+        return true
+    }
+    return false
 }
 
 export function evalExtension() {
