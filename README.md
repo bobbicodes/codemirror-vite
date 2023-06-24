@@ -9,8 +9,8 @@ Not ready to ship yet, but making steady progress. There is a [live demo](https:
 - [x] Implement Lezer parser
 - [x] Hook up Clojure interpreter
 - [x] Eval-cell
-- [ ] Eval-at-cursor
-- [ ] Eval top-level form
+- [X] Eval-at-cursor
+- [X] Eval top-level form
 - [ ] Display results inline
 - [ ] Implement clear-events
 
