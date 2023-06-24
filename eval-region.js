@@ -122,7 +122,7 @@ function nodeAtCursor(state) {
 function topLevelNode(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
-    return parents(n, [])[0]
+    return parents(n, [])[parents(n, []).length - 1]
 }
 
 function cursorNodeString(state) {
@@ -139,7 +139,7 @@ function evalAtCursor(view) {
 }
 
 function evalTopLevel(view) {
-    console.log("evalTopLevel>", evalString(topLevelString((view.state))))
+    console.log("evalTopLevel>", evalString(topLevelString(view.state)))
     return true
 }
 
