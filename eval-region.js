@@ -106,13 +106,8 @@ function nodeRangeStr(state, node) {
     return state.doc.slice(node.from, node.to).toString()
 }
 
-function filterParents(pos, node, p) {
-    const result = p.filter(n => pos == n.to && pos == node.to);
-    return result
-}
-
 function highestParent(pos, node) {
-    const p = filterParents(pos, node, parents(node, []))
+    const p = parents(node, []).filter(n => pos == n.to && pos == node.to);
     return p[p.length - 1]
 }
 
