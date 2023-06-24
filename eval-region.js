@@ -132,8 +132,8 @@ function nodeAtCursor(state) {
     const n = nearestTouching(state, pos)
     const u = uppermostEdge(pos, n)
     //console.log("parents:", parents(n, []))
-    console.log("touching:", nodeRangeStr(state, n))
-    console.log("upper:", nodeRangeStr(state, u))
+    //console.log("touching:", nodeRangeStr(state, n))
+    //console.log("upper:", nodeRangeStr(state, u))
     return uppermostEdge(pos, n)
 }
 
@@ -142,8 +142,8 @@ function cursorNodeString(state) {
 }
 
 function evalAtCursor(view) {
-    console.log(cursorNodeString(view.state))
-    //console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
+    //console.log(cursorNodeString(view.state))
+    console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
     return true
 }
 
