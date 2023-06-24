@@ -102,18 +102,10 @@ function rangeStr(state, selection) {
     return state.doc.slice(selection.from, selection.to).toString()
 }
 
-function nodeRangeStr(state, node) {
-    return state.doc.slice(node.from, node.to).toString()
-}
-
-function highestParent(pos, node) {
-    const p = parents(node, []).filter(n => pos == n.to && pos == node.to);
-    return p[p.length - 1]
-}
-
 // Return node or its highest parent that ends at the cursor position
  function uppermostEdge(pos, node) {
-   return highestParent(pos, node) || node
+    const p = parents(node, []).filter(n => pos == n.to && pos == node.to);
+    return p[p.length - 1] || node
 }
 
 function isTerminal(node, pos) {
@@ -124,16 +116,30 @@ function isTerminal(node, pos) {
 function nodeAtCursor(state) {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
-    const u = uppermostEdge(pos, n)
     return uppermostEdge(pos, n)
+}
+
+function topLevelNode(state) {
+    const pos =  mainSelection(state).from
+    const n = nearestTouching(state, pos)
+    return parents(n, [])[0]
 }
 
 function cursorNodeString(state) {
     return rangeStr(state, nodeAtCursor(state))
 }
 
+function topLevelString(state) {
+    return rangeStr(state, topLevelNode(state))
+}
+
 function evalAtCursor(view) {
     console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
+    return true
+}
+
+function evalTopLevel(view) {
+    console.log("evalTopLevel>", evalString(topLevelString((view.state))))
     return true
 }
 
@@ -146,5 +152,9 @@ export function evalExtension() {
         {
             key: "Ctrl-Enter",
             run: evalAtCursor
+        },
+        {
+            key: "Alt-Enter",
+            run: evalTopLevel
         }]))
 }
