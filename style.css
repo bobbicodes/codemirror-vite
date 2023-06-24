@@ -11,12 +11,8 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  font-size: x-large;
-}
-
 #app {
   max-width: 280px;
   margin: 0 auto;
-  padding: 2rem;
+  font-size: x-large;
 }
