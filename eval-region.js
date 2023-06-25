@@ -33,7 +33,7 @@ function isTop(node) {
 }
 
 function evalCell(view) {
-    console.log("evalCell>", evalString(view.state.doc.text.join(" ")))
+    console.log("evalCell>", evalString(ctx, view.state.doc.text.join(" ")))
     return true
 }
 
