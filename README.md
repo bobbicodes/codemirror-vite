@@ -1,4 +1,4 @@
-# lang-clojure-eval
+# lang-clojure-eval [![NPM version](https://img.shields.io/npm/v/lang-clojure-eval.svg)](https://www.npmjs.com/package/lang-clojure-eval)
 
 A Codemirror 6 language extension based on the [Lezer Clojure](https://github.com/nextjournal/lezer-clojure) parser, with inline-evaluation support via the [Small Clojure Interpreter (SCI)](https://github.com/babashka/sci).
 
