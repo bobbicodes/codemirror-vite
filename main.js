@@ -80,7 +80,7 @@ function modifier() {
   if (isMac()) {
       return "Cmd"
   } else {
-      return "Alt"
+      return "Ctrl"
   }
 }
 
@@ -89,9 +89,9 @@ new EditorView({
   parent: document.querySelector('#app')
 }).focus()
 
-let topLevelText = modifier() + "+Enter = Eval top-level form"
+let topLevelText = "Alt+Enter = Eval top-level form"
 let keyBindings = "<strong>Key bindings:</strong>,Shift+Enter = Eval cell," + 
-                   topLevelText + ",Ctrl+Enter = Eval at cursor";
+                   topLevelText + "," + modifier() + "+Enter = Eval at cursor";
 keyBindings = keyBindings.split(',');
 for ( let i = 0; i < keyBindings.length; i++ )
 keyBindings[i] = "" + keyBindings[i] + "<br>";

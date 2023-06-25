@@ -155,11 +155,11 @@ export function evalExtension() {
         },
         {
             key: "Ctrl-Enter",
+            mac: "Cmd-Enter",
             run: evalAtCursor
         },
         {
             key: "Alt-Enter",
-            mac: "Cmd-Enter",
             run: evalTopLevel
         }]))
 }
