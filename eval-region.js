@@ -156,11 +156,28 @@ function isLinux() {
 
 function isMac() {
     if (!isLinux &&
-        navigator.userAgent.match(/(Mac)|(iPhone)|(iPad)|(iPod)/g) === null) {
+        navigator.userAgent.match(/(Mac)|(iPhone)|(iPad)|(iPod)/g) != null) {
         return true
     }
     return false
 }
+
+function modifier() {
+    if (isMac()) {
+        return "Cmd"
+    } else {
+        return "Alt"
+    }
+}
+
+let topLevelText = modifier() + "+Enter = Eval top-level form"
+let keyBindings = "<strong>Key bindings:</strong>,Shift+Enter = Eval cell," + 
+                   topLevelText + ",Ctrl+Enter = Eval at cursor";
+keyBindings = keyBindings.split(',');
+for ( let i = 0; i < keyBindings.length; i++ )
+keyBindings[i] = "" + keyBindings[i] + "<br>";
+keyBindings = keyBindings.join('');
+document.getElementById("keymap").innerHTML = keyBindings;
 
 export function evalExtension() {
     return Prec.highest(keymap.of(
@@ -173,7 +190,7 @@ export function evalExtension() {
             run: evalAtCursor
         },
         {
-            key: "Alt-Enter",
+            key: modifier().concat("-Enter"),
             run: evalTopLevel
         }]))
 }
