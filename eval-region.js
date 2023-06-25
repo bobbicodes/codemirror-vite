@@ -120,9 +120,29 @@ function topLevelString(state) {
 
 let ctx = sciInit()
 
+function updateEditor(view, text, pos) {
+    const doc = view.state.doc.toString()
+    const end = doc.length
+    view.dispatch({
+        changes: {from: 0, to: end, insert: text},
+        selection: {anchor: pos, head: pos}
+    })
+}
+
+let evalResult = ""
+let codeTail = ""
+
 function evalAtCursor(view) {
     console.log(cursorNodeString(view.state))
     console.log("evalAtCursor>", evalString(ctx, cursorNodeString(view.state)))
+    const code = view.state.doc.toString()
+    const pos = view.state.selection.main.head
+    const codeBeforeCursor = code.slice(0, pos)
+    const codeAfterCursor = code.slice(pos, code.length)
+    let evalResult = evalString(ctx, cursorNodeString(view.state))
+    const codeWithResult = codeBeforeCursor + " => " + evalResult + " " + codeAfterCursor
+    updateEditor(view, codeWithResult, pos)
+    view.dispatch({selection: {anchor: pos, head: pos}})
     return true
 }
 
