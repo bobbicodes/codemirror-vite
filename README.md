@@ -2,6 +2,29 @@
 
 A Codemirror 6 language extension based on the [Lezer Clojure](https://github.com/nextjournal/lezer-clojure) parser, with inline-evaluation support via the [Small Clojure Interpreter (SCI)](https://github.com/babashka/sci).
 
+## API Reference
+<dl>
+<dt>
+  <code><strong><a href="https://github.com/bobbicodes/lang-clojure-eval/blob/5e79a06a6f8b46ea8e3f2bbbdb701983752db0a4/main.js#L11>clojure</a></strong>() → <a href="https://codemirror.net/docs/ref#language.LanguageSupport">LanguageSupport</a></code></dt>
+
+<dd><p>Clojure language support.</p>
+</dd>
+<dt>
+  <code><strong><a href="https://github.com/bobbicodes/lang-clojure-eval/blob/5e79a06a6f8b46ea8e3f2bbbdb701983752db0a4/main.js#L55">clojureLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
+
+<dd><p>A language provider based on the <a href="https://github.com/nextjournal/lezer-clojure">Lezer Clojure
+parser</a>, extended with
+highlighting and indentation information.</p>
+</dd>
+<dt>
+  <code><strong><a href="https://github.com/bobbicodes/lang-clojure-eval/blob/5e79a06a6f8b46ea8e3f2bbbdb701983752db0a4/eval-region.js#L178">evalExtension</a></strong>: <a href="https://codemirror.net/docs/ref#state.Extension">Extension</a></code></dt>
+
+<dd><p>A language provider based on the <a href="https://github.com/nextjournal/lezer-clojure">Lezer Clojure
+parser</a>, extended with
+highlighting and indentation information.</p>
+</dd>
+</dl>
+
 ## Status
 
 Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch.
