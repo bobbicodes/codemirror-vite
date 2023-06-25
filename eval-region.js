@@ -2,7 +2,7 @@ import { Prec } from '@codemirror/state'
 import { keymap } from '@codemirror/view'
 import { syntaxTree } from "@codemirror/language"
 import { props } from "@nextjournal/lezer-clojure"
-import { evalString } from "./sci"
+import { evalString, sciInit } from "./sci"
 import { NodeProp } from "@lezer/common"
 
 // Node props are marked in the grammar and distinguish categories of nodes
