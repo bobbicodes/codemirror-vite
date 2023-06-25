@@ -4,7 +4,7 @@ import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
 import { styleTags, tags } from "@lezer/highlight"
 import { indentNodeProp, foldNodeProp, foldInside, LRLanguage, LanguageSupport } from "@codemirror/language"
-import { evalExtension, modifier } from "./eval-region"
+import { evalExtension } from "./eval-region"
 
 const { coll } = props
 
@@ -66,7 +66,7 @@ new EditorView({
   parent: document.querySelector('#app')
 }).focus()
 
-let topLevelText = modifier() + "+Enter = Eval top-level form"
+let topLevelText = "Alt/Cmd+Enter = Eval top-level form"
 let keyBindings = "<strong>Key bindings:</strong>,Shift+Enter = Eval cell," + 
                    topLevelText + ",Ctrl+Enter = Eval at cursor";
 keyBindings = keyBindings.split(',');

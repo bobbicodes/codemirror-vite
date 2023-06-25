@@ -147,29 +147,6 @@ function evalTopLevel(view) {
     return true
 }
 
-function isLinux() {
-    if (navigator.userAgent.match(/(Linux)|(X11)/g) === null) {
-        return false
-    }
-    return true
-}
-
-function isMac() {
-    if (!isLinux &&
-        navigator.userAgent.match(/(Mac)|(iPhone)|(iPad)|(iPod)/g) != null) {
-        return true
-    }
-    return false
-}
-
-export function modifier() {
-    if (isMac()) {
-        return "Cmd"
-    } else {
-        return "Alt"
-    }
-}
-
 export function evalExtension() {
     return Prec.highest(keymap.of(
         [{
@@ -181,7 +158,8 @@ export function evalExtension() {
             run: evalAtCursor
         },
         {
-            key: modifier().concat("-Enter"),
+            key: "Alt-Enter",
+            mac: "Cmd-Enter",
             run: evalTopLevel
         }]))
 }
