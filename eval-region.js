@@ -127,7 +127,6 @@ let posBeforeEval = 0
 function updateEditor(view, text, pos) {
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
-    //console.log("codeBeforeEval:", codeBeforeEval)
     const end = doc.length
     console.log("end:", end)
     console.log("text:", text)
@@ -135,13 +134,9 @@ function updateEditor(view, text, pos) {
         changes: {from: 0, to: end, insert: text},
         selection: {anchor: pos, head: pos}
     })
-    console.log("codeBeforeEval:", codeBeforeEval)
 }
 
 function evalAtCursor(view) {
-   // console.log(cursorNodeString(view.state))
-   // console.log("evalAtCursor>", evalString(ctx, cursorNodeString(view.state)))
-    //console.log(codeBeforeEval)
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     posBeforeEval = view.state.selection.main.head
@@ -152,14 +147,12 @@ function evalAtCursor(view) {
     const codeAfterCursor = codeBeforeEval.slice(posBeforeEval, codeBeforeEval.length)
     evalResult = evalString(ctx, cursorNodeString(view.state))
     const codeWithResult = codeBeforeCursor + " => " + evalResult + " " + codeAfterCursor
-   
     updateEditor(view, codeWithResult, posBeforeEval)
     view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
     return true
 }
 
 function clearEval(view) {
-    console.log("evalResult:", evalResult)
     if (evalResult.length != 0) {
         evalResult = ""
         updateEditor(view, codeBeforeEval, posBeforeEval)
