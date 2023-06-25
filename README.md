@@ -19,9 +19,7 @@ highlighting and indentation information.</p>
 <dt>
   <code><strong><a href="https://github.com/bobbicodes/lang-clojure-eval/blob/5e79a06a6f8b46ea8e3f2bbbdb701983752db0a4/eval-region.js#L178">evalExtension</a></strong>: <a href="https://codemirror.net/docs/ref#state.Extension">Extension</a></code></dt>
 
-<dd><p>A language provider based on the <a href="https://github.com/nextjournal/lezer-clojure">Lezer Clojure
-parser</a>, extended with
-highlighting and indentation information.</p>
+<dd><p>Inline-evaluation support via the <a href="https://github.com/babashka/sci">Small Clojure Interpreter</a></p>
 </dd>
 </dl>
 
