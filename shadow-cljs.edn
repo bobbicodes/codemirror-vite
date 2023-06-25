@@ -2,7 +2,8 @@
  :dev-http {8000 "public"}
  :deps true
  :builds
- {:app
+ {:sci
   {:target :esm
    :output-dir "public/js"
-   :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string}}}}}}
+   :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string
+                             sciInit lang-clojure-eval.main/sci-init}}}}}}
