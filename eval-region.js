@@ -119,31 +119,51 @@ function topLevelString(state) {
 }
 
 let ctx = sciInit()
+let evalResult = ""
+let codeTail = ""
+let codeBeforeEval = ""
+let posBeforeEval = 0
 
 function updateEditor(view, text, pos) {
     const doc = view.state.doc.toString()
+    codeBeforeEval = doc
+    //console.log("codeBeforeEval:", codeBeforeEval)
     const end = doc.length
+    console.log("end:", end)
+    console.log("text:", text)
     view.dispatch({
         changes: {from: 0, to: end, insert: text},
         selection: {anchor: pos, head: pos}
     })
+    console.log("codeBeforeEval:", codeBeforeEval)
 }
 
-let evalResult = ""
-let codeTail = ""
-
 function evalAtCursor(view) {
-    console.log(cursorNodeString(view.state))
-    console.log("evalAtCursor>", evalString(ctx, cursorNodeString(view.state)))
-    const code = view.state.doc.toString()
-    const pos = view.state.selection.main.head
-    const codeBeforeCursor = code.slice(0, pos)
-    const codeAfterCursor = code.slice(pos, code.length)
-    let evalResult = evalString(ctx, cursorNodeString(view.state))
+   // console.log(cursorNodeString(view.state))
+   // console.log("evalAtCursor>", evalString(ctx, cursorNodeString(view.state)))
+    //console.log(codeBeforeEval)
+    const doc = view.state.doc.toString()
+    codeBeforeEval = doc
+    posBeforeEval = view.state.selection.main.head
+    console.log("posBeforeEval:", posBeforeEval)
+    console.log("codeBeforeEval:", codeBeforeEval)
+    const codeBeforeCursor = codeBeforeEval.slice(0, posBeforeEval)
+    console.log("codeBeforeCursor:", codeBeforeCursor)
+    const codeAfterCursor = codeBeforeEval.slice(posBeforeEval, codeBeforeEval.length)
+    evalResult = evalString(ctx, cursorNodeString(view.state))
     const codeWithResult = codeBeforeCursor + " => " + evalResult + " " + codeAfterCursor
-    updateEditor(view, codeWithResult, pos)
-    view.dispatch({selection: {anchor: pos, head: pos}})
+   
+    updateEditor(view, codeWithResult, posBeforeEval)
+    view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
     return true
+}
+
+function clearEval(view) {
+    console.log("evalResult:", evalResult)
+    if (evalResult.length != 0) {
+        evalResult = ""
+        updateEditor(view, codeBeforeEval, posBeforeEval)
+    }
 }
 
 function evalTopLevel(view) {
@@ -153,17 +173,12 @@ function evalTopLevel(view) {
 
 export function evalExtension() {
     return Prec.highest(keymap.of(
-        [{
-            key: "Shift-Enter",
-            run: evalCell
-        },
-        {
-            key: "Ctrl-Enter",
-            mac: "Cmd-Enter",
-            run: evalAtCursor
-        },
-        {
-            key: "Alt-Enter",
-            run: evalTopLevel
-        }]))
+        [{key: "Shift-Enter", run: evalCell},
+         {key: "Ctrl-Enter", mac: "Cmd-Enter", run: evalAtCursor},
+         {key: "Alt-Enter", run: evalTopLevel},
+         {key: "Escape", run: clearEval},
+         {key: "ArrowLeft", run: clearEval},
+         {key: "ArrowRight", run: clearEval},
+         {key: "ArrowUp", run: clearEval},
+         {key: "ArrowDown", run: clearEval}]))
 }
