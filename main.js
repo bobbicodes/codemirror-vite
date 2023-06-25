@@ -58,7 +58,7 @@ export function clojure() {
 
 let editorState = EditorState.create({
   doc: `(map inc (range 5))`,
-  extensions: [basicSetup, clojure(), evalExtension()]
+  extensions: [basicSetup.slice(0, 15).concat(basicSetup.slice(16)), clojure(), evalExtension()]
 })
 
 function isLinux() {
