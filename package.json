@@ -1,11 +1,13 @@
 {
   "name": "lang-clojure-eval",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Bobbi Towers <btowers793@gmail.com>",
-  "description": "Lezer-based Codemirror extension with live evaluation",
+  "description": "Lezer-based Clojure Codemirror 6 extension with live evaluation",
   "main": "dist/index.cjs",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     "import": "./dist/index.es.js",
     "require": "./dist/index.cjs"
@@ -21,7 +23,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "@codemirror/lang-javascript": "^6.1.9",
     "@lezer/common": "^1.0.3",
     "@nextjournal/lezer-clojure": "^1.0.0",
     "codemirror": "^6.0.1"
