@@ -4,7 +4,6 @@ import { syntaxTree } from "@codemirror/language"
 import { props } from "@nextjournal/lezer-clojure"
 import { evalString } from "./sci"
 import { NodeProp } from "@lezer/common"
-//import { nodeAtCursor } from "./nodes"
 
 // Node props are marked in the grammar and distinguish categories of nodes
 
@@ -70,27 +69,9 @@ function isTerminalType(nodeType) {
     }
 }
 
-function childDir(parent, from, dir) {
-    switch (dir) {
-        case 1:
-            return parent.childAfter(from)
-        case -1:
-            return parent.childBefore(from)
-    }
-}
-
-function childSide(child, dir) {
-    switch (dir) {
-        case 1:
-            return child.to
-        case -1:
-            return child.from
-    }
-}
-
 function children(parent, from, dir) {
-    let child = childDir(parent, from, dir)
-    return parent
+    let child = parent.childBefore(from)
+    return children(parent, child.from).unshift(child)
 }
 
 function parents(node, p) {
@@ -138,6 +119,7 @@ function topLevelString(state) {
 }
 
 function evalAtCursor(view) {
+    console.log(cursorNodeString(view.state))
     console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
     return true
 }
