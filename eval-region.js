@@ -32,11 +32,6 @@ function isTop(node) {
     return isTopType(node.type);
 }
 
-function evalCell(view) {
-    console.log("evalCell>", evalString(ctx, view.state.doc.text.join(" ")))
-    return true
-}
-
 function mainSelection(state) {
     return state.selection.asSingle().ranges[0]
 }
@@ -167,8 +162,17 @@ function evalTopLevel(view) {
     const codeWithResult = codeBeforeFormEnd + " => " + evalResult + " " + codeAfterFormEnd
     console.log("codeWithResult:", codeWithResult)
     updateEditor(view, codeWithResult, posBeforeEval)
-   // view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
+    //view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
     console.log("evalTopLevel>", evalString(ctx, topLevelString(view.state)))
+    return true
+}
+
+function evalCell(view) {
+    const doc = view.state.doc.toString()
+    evalResult = evalString(ctx, view.state.doc.text.join(" "))
+    const codeWithResult = doc + "\n" + " => " + evalResult
+    updateEditor(view, codeWithResult, posBeforeEval)
+    //console.log("evalCell>", evalString(ctx, view.state.doc.text.join(" ")))
     return true
 }
 
