@@ -32,5 +32,5 @@ npx shadow-cljs release sci
 ## Credits
 
 - The [lang-clojure](https://github.com/nextjournal/lang-clojure/) extension provides the Lezer parser, highlighting and formatting information.
-- Evaluation functionality ported from Nextjurnal's [clojure-mode](https://github.com/nextjournal/clojure-mode/).
+- Evaluation functionality ported from Nextjournal's [clojure-mode](https://github.com/nextjournal/clojure-mode/).
 - [SCI](https://github.com/babashka/sci) compiled to ESM with [shadow-cljs](https://github.com/thheller/shadow-cljs).
