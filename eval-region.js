@@ -100,6 +100,8 @@ function nodeAtCursor(state) {
     return uppermostEdge(pos, n)
 }
 
+let posAtFormEnd = 0
+
 function topLevelNode(state) {
     const pos =  mainSelection(state).from
     const p = parents(nearestTouching(state, pos), [])
@@ -128,8 +130,6 @@ function updateEditor(view, text, pos) {
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     const end = doc.length
-    console.log("end:", end)
-    console.log("text:", text)
     view.dispatch({
         changes: {from: 0, to: end, insert: text},
         selection: {anchor: pos, head: pos}
@@ -140,10 +140,7 @@ function evalAtCursor(view) {
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     posBeforeEval = view.state.selection.main.head
-    console.log("posBeforeEval:", posBeforeEval)
-    console.log("codeBeforeEval:", codeBeforeEval)
     const codeBeforeCursor = codeBeforeEval.slice(0, posBeforeEval)
-    console.log("codeBeforeCursor:", codeBeforeCursor)
     const codeAfterCursor = codeBeforeEval.slice(posBeforeEval, codeBeforeEval.length)
     evalResult = evalString(ctx, cursorNodeString(view.state))
     const codeWithResult = codeBeforeCursor + " => " + evalResult + " " + codeAfterCursor
@@ -160,6 +157,17 @@ function clearEval(view) {
 }
 
 function evalTopLevel(view) {
+    posAtFormEnd = topLevelNode(view.state).to
+    const doc = view.state.doc.toString()
+    posBeforeEval = view.state.selection.main.head
+    codeBeforeEval = doc
+    const codeBeforeFormEnd = codeBeforeEval.slice(0, posAtFormEnd)
+    const codeAfterFormEnd = codeBeforeEval.slice(posAtFormEnd, codeBeforeEval.length)
+    evalResult = evalString(ctx, topLevelString(view.state))
+    const codeWithResult = codeBeforeFormEnd + " => " + evalResult + " " + codeAfterFormEnd
+    console.log("codeWithResult:", codeWithResult)
+    updateEditor(view, codeWithResult, posBeforeEval)
+   // view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
     console.log("evalTopLevel>", evalString(ctx, topLevelString(view.state)))
     return true
 }
