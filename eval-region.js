@@ -118,14 +118,16 @@ function topLevelString(state) {
     return rangeStr(state, topLevelNode(state))
 }
 
+let ctx = sciInit()
+
 function evalAtCursor(view) {
     console.log(cursorNodeString(view.state))
-    console.log("evalAtCursor>", evalString(cursorNodeString(view.state)))
+    console.log("evalAtCursor>", evalString(ctx, cursorNodeString(view.state)))
     return true
 }
 
 function evalTopLevel(view) {
-    console.log("evalTopLevel>", evalString(topLevelString(view.state)))
+    console.log("evalTopLevel>", evalString(ctx, topLevelString(view.state)))
     return true
 }
 
