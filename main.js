@@ -98,7 +98,3 @@ for ( let i = 0; i < keyBindings.length; i++ )
 keyBindings[i] = "" + keyBindings[i] + "<br>";
 keyBindings = keyBindings.join('');
 document.getElementById("keymap").innerHTML = keyBindings;
-
-export function clojure() {
-  return new LanguageSupport(clojureLanguage)
-}
