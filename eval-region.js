@@ -162,22 +162,13 @@ function isMac() {
     return false
 }
 
-function modifier() {
+export function modifier() {
     if (isMac()) {
         return "Cmd"
     } else {
         return "Alt"
     }
 }
-
-let topLevelText = modifier() + "+Enter = Eval top-level form"
-let keyBindings = "<strong>Key bindings:</strong>,Shift+Enter = Eval cell," + 
-                   topLevelText + ",Ctrl+Enter = Eval at cursor";
-keyBindings = keyBindings.split(',');
-for ( let i = 0; i < keyBindings.length; i++ )
-keyBindings[i] = "" + keyBindings[i] + "<br>";
-keyBindings = keyBindings.join('');
-document.getElementById("keymap").innerHTML = keyBindings;
 
 export function evalExtension() {
     return Prec.highest(keymap.of(
