@@ -160,10 +160,9 @@ function evalTopLevel(view) {
     const codeAfterFormEnd = codeBeforeEval.slice(posAtFormEnd, codeBeforeEval.length)
     evalResult = evalString(ctx, topLevelString(view.state))
     const codeWithResult = codeBeforeFormEnd + " => " + evalResult + " " + codeAfterFormEnd
-    console.log("codeWithResult:", codeWithResult)
     updateEditor(view, codeWithResult, posBeforeEval)
     //view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
-    console.log("evalTopLevel>", evalString(ctx, topLevelString(view.state)))
+    //console.log("evalTopLevel>", evalString(ctx, topLevelString(view.state)))
     return true
 }
 

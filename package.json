@@ -26,5 +26,13 @@
     "@lezer/common": "^1.0.3",
     "@nextjournal/lezer-clojure": "^1.0.0",
     "codemirror": "^6.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobbicodes/lang-clojure-eval.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bobbicodes/lang-clojure-eval/issues"
+  },
+  "homepage": "https://github.com/bobbicodes/lang-clojure-eval#readme"
 }
