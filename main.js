@@ -99,6 +99,6 @@ keyBindings[i] = "" + keyBindings[i] + "<br>";
 keyBindings = keyBindings.join('');
 document.getElementById("keymap").innerHTML = keyBindings;
 
-//console.log(tree(editorState, 0))
-//console.log(evalCell())
-//console.log(editorState.doc.text.join(" "))
+export function clojure() {
+  return new LanguageSupport(clojureLanguage)
+}
