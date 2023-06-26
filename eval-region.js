@@ -175,8 +175,8 @@ function evalCell(view) {
     return true
 }
 
-export function evalExtension() {
-    return Prec.highest(keymap.of(
+export const evalExtension = 
+     Prec.highest(keymap.of(
         [{key: "Shift-Enter", run: evalCell},
          {key: "Ctrl-Enter", mac: "Cmd-Enter", run: evalAtCursor},
          {key: "Alt-Enter", run: evalTopLevel},
@@ -185,4 +185,3 @@ export function evalExtension() {
          {key: "ArrowRight", run: clearEval},
          {key: "ArrowUp", run: clearEval},
          {key: "ArrowDown", run: clearEval}]))
-}

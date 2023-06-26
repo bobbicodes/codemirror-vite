@@ -53,13 +53,13 @@ export const clojureLanguage = LRLanguage.define({
 })
 
 export function clojure() {
-  return new LanguageSupport(clojureLanguage)
+  return new LanguageSupport(clojureLanguage, [evalExtension])
 }
 
 let editorState = EditorState.create({
   doc: `(map inc (range 5))`,
   // disable active line highlighting, see https://github.com/codemirror/basic-setup/blob/b3be7cd30496ee578005bd11b1fa6a8b21fcbece/src/codemirror.ts#L66
-  extensions: [basicSetup.slice(0, 15).concat(basicSetup.slice(16)), clojure(), evalExtension()]
+  extensions: [basicSetup.slice(0, 15).concat(basicSetup.slice(16)), clojure()]
 })
 
 function isLinux() {
