@@ -1,4 +1,4 @@
-import './style.css'
+import '../style.css'
 import { EditorView, basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { parser, props } from "@nextjournal/lezer-clojure"
