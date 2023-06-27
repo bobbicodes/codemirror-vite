@@ -26,3 +26,4 @@ public/js/cljs-runtime/
 .calva/output-window/output.calva-repl
 *.cache
 .cpcache/
+dist/js/cljs-runtime/
