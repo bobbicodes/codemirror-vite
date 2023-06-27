@@ -1,6 +1,6 @@
 {
   "name": "lang-clojure-eval",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Bobbi Towers <btowers793@gmail.com>",
   "description": "Lezer-based Clojure Codemirror 6 extension with live evaluation",
   "main": "dist/index.cjs",

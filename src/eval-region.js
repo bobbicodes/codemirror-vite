@@ -175,13 +175,58 @@ function evalCell(view) {
     return true
 }
 
+const alpha = Array.from(Array(58)).map((e, i) => i + 65);
+const alphabet = alpha.map((x) => String.fromCharCode(x));
+let letterKeys = []
+for (let i = 0; i < alphabet.length; i++) {
+    letterKeys = letterKeys.concat({key: alphabet[i], run: clearEval})
+}
+
 export const evalExtension = 
      Prec.highest(keymap.of(
         [{key: "Shift-Enter", run: evalCell},
-         {key: "Ctrl-Enter", mac: "Cmd-Enter", run: evalAtCursor},
+         {key: "Mod-Enter", run: evalAtCursor},
          {key: "Alt-Enter", run: evalTopLevel},
          {key: "Escape", run: clearEval},
          {key: "ArrowLeft", run: clearEval},
          {key: "ArrowRight", run: clearEval},
          {key: "ArrowUp", run: clearEval},
-         {key: "ArrowDown", run: clearEval}]))
+         {key: "ArrowDown", run: clearEval},
+         {key: "Backspace", run: clearEval},
+         {key: "Enter", run: clearEval},
+         {key: "Tab", run: clearEval},
+         {key: "Delete", run: clearEval},
+         {key: "0", run: clearEval},
+         {key: "1", run: clearEval},
+         {key: "2", run: clearEval},
+         {key: "3", run: clearEval},
+         {key: "4", run: clearEval},
+         {key: "5", run: clearEval},
+         {key: "6", run: clearEval},
+         {key: "7", run: clearEval},
+         {key: "8", run: clearEval},
+         {key: "9", run: clearEval},
+         {key: "!", run: clearEval},
+         {key: "@", run: clearEval},
+         {key: "#", run: clearEval},
+         {key: "$", run: clearEval},
+         {key: "%", run: clearEval},
+         {key: "^", run: clearEval},
+         {key: "&", run: clearEval},
+         {key: "*", run: clearEval},
+         {key: "-", run: clearEval},
+         {key: "=", run: clearEval},
+         {key: "+", run: clearEval},
+         {key: "/", run: clearEval},
+         {key: "`", run: clearEval},
+         {key: "\"", run: clearEval},
+         {key: "'", run: clearEval},
+         {key: ";", run: clearEval},
+         {key: ":", run: clearEval},
+         {key: "[", run: clearEval},
+         {key: "]", run: clearEval},
+         {key: "{", run: clearEval},
+         {key: "}", run: clearEval},
+         {key: "(", run: clearEval},
+         {key: ")", run: clearEval},
+         {key: "Space", run: clearEval}].concat(letterKeys)))
