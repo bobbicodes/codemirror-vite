@@ -35,7 +35,8 @@ Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github
 - [X] Display results inline
 - [X] Implement clear-events
 - [X] [Publish to npm](https://www.npmjs.com/package/lang-clojure-eval)
-- [ ] Test published package
+- [X] Create test suite
+- [X] Test published package
 ## Run demo locally
 
 ```bash
