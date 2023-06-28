@@ -7,7 +7,7 @@ A Codemirror 6 language extension based on the [Lezer Clojure](https://github.co
 <dt>
   <code><strong><a href="https://github.com/bobbicodes/lang-clojure-eval/blob/bce8ebaf2e2989cd3d7d1d393cf50977442c1eaa/main.js#L11">clojure</a></strong>() → <a href="https://codemirror.net/docs/ref#language.LanguageSupport">LanguageSupport</a></code></dt>
 
-<dd><p>Clojure language support.</p>
+<dd><p>Clojure language support including evaluation.</p>
 </dd>
 <dt>
   <code><strong><a href="https://github.com/bobbicodes/lang-clojure-eval/blob/5e79a06a6f8b46ea8e3f2bbbdb701983752db0a4/main.js#L55">clojureLanguage</a></strong>: <a href="https://codemirror.net/docs/ref#language.LRLanguage">LRLanguage</a></code></dt>
