@@ -38,7 +38,8 @@ Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github
 - ✅ Create test suite
 - ✅ Test published package
 - ✅ Handle errors
-- [ ] Truncate very long eval results
+- ✅ Pretty-print eval result
+- ✅ Truncate very long eval result
 - [ ] Handle infinite loops
 
 ## Run demo locally

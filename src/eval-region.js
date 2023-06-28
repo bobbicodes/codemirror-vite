@@ -131,6 +131,13 @@ function updateEditor(view, text, pos) {
     })
 }
 
+function splitResult(s) {
+    if (s.length > 100) {
+       return "\n" + s.substring(0, 100) + "..." + s.substring(s.length -2)
+    }
+    return s
+}
+
 function tryEval(ctx, s) {
     try {
         return evalString(ctx, s)
@@ -146,7 +153,7 @@ function evalAtCursor(view) {
     posBeforeEval = view.state.selection.main.head
     const codeBeforeCursor = codeBeforeEval.slice(0, posBeforeEval)
     const codeAfterCursor = codeBeforeEval.slice(posBeforeEval, codeBeforeEval.length)
-    evalResult = tryEval(ctx, cursorNodeString(view.state))
+    evalResult = splitResult(tryEval(ctx, cursorNodeString(view.state)))
     const codeWithResult = codeBeforeCursor + " => " + evalResult + " " + codeAfterCursor
     updateEditor(view, codeWithResult, posBeforeEval)
     view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
@@ -167,7 +174,7 @@ function evalTopLevel(view) {
     codeBeforeEval = doc
     const codeBeforeFormEnd = codeBeforeEval.slice(0, posAtFormEnd)
     const codeAfterFormEnd = codeBeforeEval.slice(posAtFormEnd, codeBeforeEval.length)
-    evalResult = tryEval(ctx, topLevelString(view.state))
+    evalResult = splitResult(tryEval(ctx, topLevelString(view.state)))
     const codeWithResult = codeBeforeFormEnd + " => " + evalResult + " " + codeAfterFormEnd
     updateEditor(view, codeWithResult, posBeforeEval)
     return true
@@ -175,7 +182,7 @@ function evalTopLevel(view) {
 
 function evalCell(view) {
     const doc = view.state.doc.toString()
-    evalResult = tryEval(ctx, view.state.doc.text.join(" "))
+    evalResult = splitResult(tryEval(ctx, view.state.doc.text.join(" ")))
     const codeWithResult = doc + "\n" + " => " + evalResult
     updateEditor(view, codeWithResult, posBeforeEval)
     //console.log("evalCell>", evalString(ctx, view.state.doc.text.join(" ")))
