@@ -133,7 +133,7 @@ function updateEditor(view, text, pos) {
 
 function tryEval(ctx, s) {
     try {
-        evalString(ctx, s)
+        return evalString(ctx, s)
       } catch (err) {
         console.log(err)
         return "\nError: " + err.message
