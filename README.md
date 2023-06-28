@@ -27,17 +27,17 @@ highlighting and indentation information.</p>
 
 Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch.
 
-- [x] Implement Lezer parser
-- [x] Hook up Clojure interpreter
-- [x] Eval-cell
-- [X] Eval-at-cursor
-- [X] Eval top-level form
-- [X] Display results inline
-- [X] Implement clear-events
-- [X] [Publish to npm](https://www.npmjs.com/package/lang-clojure-eval)
-- [X] Create test suite
-- [X] Test published package
-- [X] Handle errors
+- ✅ Implement Lezer parser
+- ✅ Hook up Clojure interpreter
+- ✅ Eval-cell
+- ✅ Eval-at-cursor
+- ✅ Eval top-level form
+- ✅ Display results inline
+- ✅ Implement clear-events
+- ✅ [Publish to npm](https://www.npmjs.com/package/lang-clojure-eval)
+- ✅ Create test suite
+- ✅ Test published package
+- ✅ Handle errors
 - [ ] Truncate very long eval results
 - [ ] Handle infinite loops
 
