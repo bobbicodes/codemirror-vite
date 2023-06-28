@@ -37,6 +37,8 @@ Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github
 - [X] [Publish to npm](https://www.npmjs.com/package/lang-clojure-eval)
 - [X] Create test suite
 - [X] Test published package
+- [ ] Handle errors
+- [ ] Truncate very long eval results
 ## Run demo locally
 
 ```bash
