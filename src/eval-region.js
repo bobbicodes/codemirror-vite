@@ -169,7 +169,7 @@ function evalTopLevel(view) {
 
 function evalCell(view) {
     const doc = view.state.doc.toString()
-    evalResult = tryEval(ctx, view.state.doc.text.join(" "))
+    evalResult = tryEval(view.state.doc.text.join(" "))
     const codeWithResult = doc + "\n" + " => " + evalResult
     updateEditor(view, codeWithResult, posBeforeEval)
     //console.log("evalCell>", evalString(ctx, view.state.doc.text.join(" ")))
