@@ -6,4 +6,4 @@
   {:target :esm
    :output-dir "public/js"
    :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string
-                             sciInit lang-clojure-eval.main/sci-init}}}}}}
+                             context lang-clojure-eval.main/context}}}}}}

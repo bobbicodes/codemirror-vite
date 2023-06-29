@@ -39,8 +39,8 @@ Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github
 - ✅ Test published package
 - ✅ Handle errors
 - ✅ Pretty-print eval result
-- [ ] Truncate very long eval result
-- [ ] Handle infinite loops
+- ✅ Truncate very long eval result
+- ✅ Handle infinite loops
 
 ## Run demo locally
 

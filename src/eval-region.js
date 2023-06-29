@@ -1,9 +1,9 @@
-import { Prec } from '@codemirror/state'
-import { keymap } from '@codemirror/view'
-import { syntaxTree } from "@codemirror/language"
-import { props } from "@nextjournal/lezer-clojure"
-import { evalString, sciInit } from "./sci"
-import { NodeProp } from "@lezer/common"
+import {Prec} from '@codemirror/state'
+import {keymap} from '@codemirror/view'
+import {syntaxTree} from "@codemirror/language"
+import {props} from "@nextjournal/lezer-clojure"
+import {evalString} from "./sci"
+import {NodeProp} from "@lezer/common"
 
 // Node props are marked in the grammar and distinguish categories of nodes
 
@@ -111,9 +111,7 @@ function topLevelString(state) {
     return rangeStr(state, topLevelNode(state))
 }
 
-let ctx = sciInit()
 let evalResult = ""
-let codeTail = ""
 let codeBeforeEval = ""
 let posBeforeEval = 0
 
@@ -127,9 +125,9 @@ function updateEditor(view, text, pos) {
     })
 }
 
-export function tryEval(ctx, s) {
+export function tryEval(s) {
     try {
-        return evalString(ctx, s).trim()
+        return evalString(s)
       } catch (err) {
         console.log(err)
         return "\nError: " + err.message
@@ -142,7 +140,7 @@ function evalAtCursor(view) {
     posBeforeEval = view.state.selection.main.head
     const codeBeforeCursor = codeBeforeEval.slice(0, posBeforeEval)
     const codeAfterCursor = codeBeforeEval.slice(posBeforeEval, codeBeforeEval.length)
-    evalResult = tryEval(ctx, cursorNodeString(view.state))
+    evalResult = tryEval(cursorNodeString(view.state))
     const codeWithResult = codeBeforeCursor + " => " + evalResult + " " + codeAfterCursor
     updateEditor(view, codeWithResult, posBeforeEval)
     view.dispatch({selection: {anchor: posBeforeEval, head: posBeforeEval}})
@@ -163,7 +161,7 @@ function evalTopLevel(view) {
     codeBeforeEval = doc
     const codeBeforeFormEnd = codeBeforeEval.slice(0, posAtFormEnd)
     const codeAfterFormEnd = codeBeforeEval.slice(posAtFormEnd, codeBeforeEval.length)
-    evalResult = tryEval(ctx, topLevelString(view.state))
+    evalResult = tryEval(topLevelString(view.state))
     const codeWithResult = codeBeforeFormEnd + " => " + evalResult + " " + codeAfterFormEnd
     updateEditor(view, codeWithResult, posBeforeEval)
     return true

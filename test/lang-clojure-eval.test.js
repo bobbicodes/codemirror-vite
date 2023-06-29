@@ -1,7 +1,6 @@
 import {describe, expect, test, it} from 'vitest'
 import {EditorState} from "@codemirror/state"
-import {sciInit} from "../src/sci"
-import {tryEval} from "../src/eval-region"
+import {evalString} from "../src/sci"
 import {clojure} from "../src/clojure"
  
 describe('Editor state', () => {
@@ -14,7 +13,6 @@ describe('Editor state', () => {
     })
 
     it('Evaluates Clojure code', () => {
-        let ctx = sciInit()
-        expect(tryEval(ctx, state.doc.text[0])).eq("(1 2 3 4 5)")
+        expect(evalString(state.doc.text[0])).eq("(1 2 3 4 5)\n")
     })
 })
