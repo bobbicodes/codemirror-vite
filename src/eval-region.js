@@ -19,18 +19,10 @@ const prefixContainerProp = props.prefixContainer
 const startEdgeProp = NodeProp.closedBy
 const endEdgeProp = NodeProp.openedBy
 const sameEdgeProp = props.sameEdge
-
 const up = (node) => node.parent;
-
 const isTopType = (nodeType) => nodeType.isTop
-
-function isTop(node) {
-    return isTopType(node.type);
-}
-
-function mainSelection(state) {
-    return state.selection.asSingle().ranges[0]
-}
+const isTop = (node) => isTopType(node.type)
+const mainSelection = (state) => state.selection.asSingle().ranges[0]
 
 function tree(state, pos, dir) {
     switch (arguments["length"]) {
@@ -43,24 +35,19 @@ function tree(state, pos, dir) {
     }
 }
 
-function nearestTouching(state, pos) {
-    const L = tree(state, pos, -1)
-    const R = tree(state, pos, 1)
-    const mid = tree(state, pos)
-    return L
-}
+const nearestTouching = (state, pos) => tree(state, pos, -1)
 
-function isTerminalType(nodeType) {
+const isTerminalType = (nodeType) => {
     if (isTopType(nodeType || nodeType.prefixCollProp.prop() ||
-    nodeType.collProp.prop() || nodeType.name == "Meta" ||
-    nodeType.name == "TaggedLiteral" || nodeType.name == "ConstructorCall")) {
+        nodeType.collProp.prop() || nodeType.name == "Meta" ||
+        nodeType.name == "TaggedLiteral" || nodeType.name == "ConstructorCall")) {
         return false
     } else {
         return true
     }
 }
 
-function children(parent, from, dir) {
+const children = (parent, from, dir) => {
     let child = parent.childBefore(from)
     return children(parent, child.from).unshift(child)
 }
@@ -70,12 +57,10 @@ function parents(node, p) {
     return parents(up(node), p.concat(node));
 }
 
-function rangeStr(state, selection) {
-    return state.doc.slice(selection.from, selection.to).toString()
-}
+const rangeStr = (state, selection) => state.doc.slice(selection.from, selection.to).toString()
 
 // Return node or its highest parent that ends at the cursor position
- function uppermostEdge(pos, node) {
+function uppermostEdge(pos, node) {
     const p = parents(node, []).filter(n => pos == n.to && pos == node.to);
     return p[p.length - 1] || node
 }
@@ -103,13 +88,8 @@ function topLevelNode(state) {
     }
 }
 
-function cursorNodeString(state) {
-    return rangeStr(state, nodeAtCursor(state))
-}
-
-function topLevelString(state) {
-    return rangeStr(state, topLevelNode(state))
-}
+const cursorNodeString = (state) => rangeStr(state, nodeAtCursor(state))
+const topLevelString = (state) => rangeStr(state, topLevelNode(state))
 
 let evalResult = ""
 let codeBeforeEval = ""
@@ -172,7 +152,6 @@ function evalCell(view) {
     evalResult = tryEval(view.state.doc.text.join(" "))
     const codeWithResult = doc + "\n" + " => " + evalResult
     updateEditor(view, codeWithResult, posBeforeEval)
-    //console.log("evalCell>", evalString(ctx, view.state.doc.text.join(" ")))
     return true
 }
 
