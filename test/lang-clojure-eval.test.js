@@ -1,8 +1,9 @@
-import { describe, expect, test, it } from 'vitest'
-import { EditorState } from "@codemirror/state"
-import { evalString, sciInit } from "../src/sci"
-import { clojure } from "../src/clojure"
-
+import {describe, expect, test, it} from 'vitest'
+import {EditorState} from "@codemirror/state"
+import {sciInit} from "../src/sci"
+import {tryEval} from "../src/eval-region"
+import {clojure} from "../src/clojure"
+ 
 describe('Editor state', () => {
     let state = EditorState.create({
         doc: `(map inc (range 5))`,
@@ -14,6 +15,6 @@ describe('Editor state', () => {
 
     it('Evaluates Clojure code', () => {
         let ctx = sciInit()
-        expect(evalString(ctx, state.doc.text[0])).eq("(1 2 3 4 5)")
+        expect(tryEval(ctx, state.doc.text[0])).eq("(1 2 3 4 5)")
     })
 })

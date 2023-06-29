@@ -20,13 +20,9 @@ const startEdgeProp = NodeProp.closedBy
 const endEdgeProp = NodeProp.openedBy
 const sameEdgeProp = props.sameEdge
 
-function up(node) {
-    return node.parent;
-}
+const up = (node) => node.parent;
 
-function isTopType(nodeType) {
-    return nodeType.isTop;
-}
+const isTopType = (nodeType) => nodeType.isTop
 
 function isTop(node) {
     return isTopType(node.type);
@@ -131,9 +127,9 @@ function updateEditor(view, text, pos) {
     })
 }
 
-function tryEval(ctx, s) {
+export function tryEval(ctx, s) {
     try {
-        return evalString(ctx, s)
+        return evalString(ctx, s).trim()
       } catch (err) {
         console.log(err)
         return "\nError: " + err.message
