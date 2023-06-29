@@ -5,72 +5,32 @@ import {props} from "@nextjournal/lezer-clojure"
 import {evalString} from "./sci"
 import {NodeProp} from "@lezer/common"
 
-// Node props are marked in the grammar and distinguish categories of nodes
-
-// primitive collection
-const collProp = props.coll
-// prefix collection - a prefix token that wraps the next element
-const prefixCollProp = props.prefixColl
-// the prefix edge itself
-const prefixEdgeProp = props.prefixEdge
-// prefix form - pair of [metadata, target]
-const prefixContainerProp = props.prefixContainer
-// edges at the beginning/end of collections, + "same" edges (string quotes)
-const startEdgeProp = NodeProp.closedBy
-const endEdgeProp = NodeProp.openedBy
-const sameEdgeProp = props.sameEdge
 const up = (node) => node.parent;
 const isTopType = (nodeType) => nodeType.isTop
 const isTop = (node) => isTopType(node.type)
 const mainSelection = (state) => state.selection.asSingle().ranges[0]
-
-function tree(state, pos, dir) {
-    switch (arguments["length"]) {
-        case 1:
-            return syntaxTree(state);
-        case 2:
-            return syntaxTree(state).resolveInner(pos);
-        case 3:
-            return syntaxTree(state).resolveInner(pos, dir);
-    }
-}
-
+const tree = (state, pos, dir) => syntaxTree(state).resolveInner(pos, dir)
 const nearestTouching = (state, pos) => tree(state, pos, -1)
-
-const isTerminalType = (nodeType) => {
-    if (isTopType(nodeType || nodeType.prefixCollProp.prop() ||
-        nodeType.collProp.prop() || nodeType.name == "Meta" ||
-        nodeType.name == "TaggedLiteral" || nodeType.name == "ConstructorCall")) {
-        return false
-    } else {
-        return true
-    }
-}
 
 const children = (parent, from, dir) => {
     let child = parent.childBefore(from)
     return children(parent, child.from).unshift(child)
 }
 
-function parents(node, p) {
+const parents = (node, p) => {
     if (isTop(node)) return p;
-    return parents(up(node), p.concat(node));
+    return parents(up(node), p.concat(node))
 }
 
 const rangeStr = (state, selection) => state.doc.slice(selection.from, selection.to).toString()
 
 // Return node or its highest parent that ends at the cursor position
-function uppermostEdge(pos, node) {
+const uppermostEdge = (pos, node) => {
     const p = parents(node, []).filter(n => pos == n.to && pos == node.to);
     return p[p.length - 1] || node
 }
 
-function isTerminal(node, pos) {
-    return isTerminalType(node.type) ||
-           pos === node.from || pos === node.to
-}
-
-function nodeAtCursor(state) {
+const nodeAtCursor = (state) => {
     const pos =  mainSelection(state).from
     const n = nearestTouching(state, pos)
     return uppermostEdge(pos, n)
@@ -78,7 +38,7 @@ function nodeAtCursor(state) {
 
 let posAtFormEnd = 0
 
-function topLevelNode(state) {
+const topLevelNode = (state) => {
     const pos =  mainSelection(state).from
     const p = parents(nearestTouching(state, pos), [])
     if (p.length === 0) {
@@ -95,7 +55,7 @@ let evalResult = ""
 let codeBeforeEval = ""
 let posBeforeEval = 0
 
-function updateEditor(view, text, pos) {
+const updateEditor = (view, text, pos) => {
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     const end = doc.length
@@ -107,14 +67,14 @@ function updateEditor(view, text, pos) {
 
 export function tryEval(s) {
     try {
-        return evalString(s)
+        return evalString(s).trimEnd()
       } catch (err) {
         console.log(err)
         return "\nError: " + err.message
       }
 }
 
-function evalAtCursor(view) {
+const evalAtCursor = (view) => {
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     posBeforeEval = view.state.selection.main.head
@@ -127,14 +87,14 @@ function evalAtCursor(view) {
     return true
 }
 
-function clearEval(view) {
+const clearEval = (view) => {
     if (evalResult.length != 0) {
         evalResult = ""
         updateEditor(view, codeBeforeEval, posBeforeEval)
     }
 }
 
-function evalTopLevel(view) {
+const evalTopLevel = (view) => {
     posAtFormEnd = topLevelNode(view.state).to
     const doc = view.state.doc.toString()
     posBeforeEval = view.state.selection.main.head
@@ -147,8 +107,9 @@ function evalTopLevel(view) {
     return true
 }
 
-function evalCell(view) {
+const evalCell = (view) => {
     const doc = view.state.doc.toString()
+    posBeforeEval = view.state.selection.main.head
     evalResult = tryEval(view.state.doc.text.join(" "))
     const codeWithResult = doc + "\n" + " => " + evalResult
     updateEditor(view, codeWithResult, posBeforeEval)
