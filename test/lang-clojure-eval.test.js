@@ -2,7 +2,7 @@ import {describe, expect, test, it} from 'vitest'
 import {EditorState} from "@codemirror/state"
 import {EditorView} from "codemirror"
 import {evalString} from "../src/sci"
-import {evalCell, clearEval, evalTopLevel} from '../src/eval-region'
+import {evalCell, clearEval, evalTopLevel, evalAtCursor} from '../src/eval-region'
 import {clojure} from "../src/clojure"
  
 describe('Editor state', () => {
@@ -34,5 +34,11 @@ describe('Editor state', () => {
         evalTopLevel(view)
         console.log(view.state.doc.toString())
         expect(view.state.doc.toString()).eq("(map inc (range 5)) => (1 2 3 4 5) ")
+    })
+    it('Evaluates at cursor', () => {
+        clearEval(view)
+        view.dispatch({selection: {anchor: 18, head: 18}})
+        evalAtCursor(view)
+        expect(view.state.doc.toString()).eq("(map inc (range 5) => (0 1 2 3 4) )")
     })
 })

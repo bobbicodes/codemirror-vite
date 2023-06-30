@@ -72,7 +72,7 @@ export function tryEval(s) {
       }
 }
 
-const evalAtCursor = (view) => {
+export const evalAtCursor = (view) => {
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     posBeforeEval = view.state.selection.main.head
