@@ -15,4 +15,8 @@ describe('Editor state', () => {
     it('Evaluates Clojure code', () => {
         expect(evalString(state.doc.text[0])).eq("(1 2 3 4 5)\n")
     })
+
+    it('Evaluates Cell', () => {
+        expect(evalString(state.doc.text[0])).eq("(1 2 3 4 5)\n")
+    })
 })

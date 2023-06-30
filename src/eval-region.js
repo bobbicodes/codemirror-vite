@@ -107,7 +107,7 @@ const evalTopLevel = (view) => {
     return true
 }
 
-const evalCell = (view) => {
+export const evalCell = (view) => {
     const doc = view.state.doc.toString()
     posBeforeEval = view.state.selection.main.head
     evalResult = tryEval(view.state.doc.text.join(" "))
