@@ -85,14 +85,14 @@ const evalAtCursor = (view) => {
     return true
 }
 
-const clearEval = (view) => {
+export const clearEval = (view) => {
     if (evalResult.length != 0) {
         evalResult = ""
         updateEditor(view, codeBeforeEval, posBeforeEval)
     }
 }
 
-const evalTopLevel = (view) => {
+export const evalTopLevel = (view) => {
     posAtFormEnd = topLevelNode(view.state).to
     const doc = view.state.doc.toString()
     posBeforeEval = view.state.selection.main.head

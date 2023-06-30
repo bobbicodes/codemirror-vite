@@ -2,7 +2,7 @@ import {describe, expect, test, it} from 'vitest'
 import {EditorState} from "@codemirror/state"
 import {EditorView} from "codemirror"
 import {evalString} from "../src/sci"
-import {evalCell} from '../src/eval-region'
+import {evalCell, clearEval, evalTopLevel} from '../src/eval-region'
 import {clojure} from "../src/clojure"
  
 describe('Editor state', () => {
@@ -25,5 +25,14 @@ describe('Editor state', () => {
     it('Evaluates Cell', () => {
         evalCell(view)
         expect(view.state.doc.text.join(" ")).eq("(map inc (range 5))  => (1 2 3 4 5)")
+    })
+    it('Clears evaluation result', () => {
+        clearEval(view)
+        expect(view.state.doc.text.join(" ")).eq("(map inc (range 5))")
+    })
+    it('Evaluates top-level form', () => {
+        evalTopLevel(view)
+        console.log(view.state.doc.toString())
+        expect(view.state.doc.toString()).eq("(map inc (range 5)) => (1 2 3 4 5) ")
     })
 })
