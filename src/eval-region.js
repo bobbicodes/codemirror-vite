@@ -1,9 +1,7 @@
 import {Prec} from '@codemirror/state'
 import {keymap} from '@codemirror/view'
 import {syntaxTree} from "@codemirror/language"
-import {props} from "@nextjournal/lezer-clojure"
 import {evalString} from "./sci"
-import {NodeProp} from "@lezer/common"
 
 const up = (node) => node.parent;
 const isTopType = (nodeType) => nodeType.isTop

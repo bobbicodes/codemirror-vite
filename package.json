@@ -23,7 +23,8 @@
     "@vitest/browser": "^0.32.2",
     "shadow-cljs": "^2.23.8",
     "vite": "^4.3.9",
-    "vitest": "^0.32.2"
+    "vitest": "^0.32.2",
+    "webdriverio": "^8.11.2"
   },
   "dependencies": {
     "@lezer/common": "^1.0.3",
