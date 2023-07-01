@@ -6,4 +6,5 @@
   {:target :esm
    :output-dir "public/js"
    :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string
-                             context lang-clojure-eval.main/context}}}}}}
+                             context lang-clojure-eval.main/context
+                             isISOControl lang-clojure-eval.character/isISOControl}}}}}}
