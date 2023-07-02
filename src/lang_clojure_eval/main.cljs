@@ -1,7 +1,7 @@
 (ns lang-clojure-eval.main
   (:require [sci.core :as sci]
             [lang-clojure-eval.error :refer [error-handler]]
-            [lang-clojure-eval.character :refer [isISOControl]]
+            [lang-clojure-eval.character :as char]
             [goog.string]
             [goog.string.format]
             [clojure.pprint :as pprint]
@@ -11,7 +11,9 @@
   (sci/init {:classes {'js goog/global
                        :allow :all}
              :namespaces {'clojure.core {'format goog.string/format}
-                          'lang-clojure-eval.character {'isISOControl isISOControl}}}))
+                          'lang-clojure-eval.character 
+                          {'isISOControl char/isISOControl
+                           'isLetter char/isLetter}}}))
 
 (defn eval-string [source]
   (let [reqs "(require '[lang-clojure-eval.character :as Character])"]
