@@ -8,4 +8,8 @@
    :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string
                              context lang-clojure-eval.main/context
                              isISOControl lang-clojure-eval.character/isISOControl
-                             isLetter lang-clojure-eval.character/isLetter}}}}}}
+                             isLetter lang-clojure-eval.character/isLetter
+                             ;; parseInt causes ReferenceError if exported,
+                             ;; but somehow works if it's not... why?
+                             ;parseInt lang-clojure-eval.integer/parse-int
+                             }}}}}}
