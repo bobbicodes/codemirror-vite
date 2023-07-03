@@ -9,6 +9,7 @@
                              context lang-clojure-eval.main/context
                              isISOControl lang-clojure-eval.character/isISOControl
                              isLetter lang-clojure-eval.character/isLetter
+                             digit lang-clojure-eval.character/digit
                              ;; parseInt causes ReferenceError if exported,
                              ;; but somehow works if it's not... why?
                              ;parseInt lang-clojure-eval.integer/parse-int

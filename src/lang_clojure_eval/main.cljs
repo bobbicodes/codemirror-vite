@@ -13,7 +13,8 @@
                        :allow :all}
              :namespaces {'clojure.core {'format goog.string/format}
                           'lang-clojure-eval.character
-                          {'isISOControl char/isISOControl
+                          {'digit char/digit
+                           'isISOControl char/isISOControl
                            'isLetter char/isLetter}
                           'lang-clojure-eval.integer
                           {'parseInt int/parse-int}}}))

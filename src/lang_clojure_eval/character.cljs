@@ -1,5 +1,9 @@
 (ns lang-clojure-eval.character
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.edn :as edn]))
+
+(defn digit [c r]
+  (edn/read-string (str r "r" c)))
 
 (defn isLetter [char]
   (and (= 1 (count (str char)))
