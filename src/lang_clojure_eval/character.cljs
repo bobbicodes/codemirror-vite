@@ -5,16 +5,40 @@
 (defn digit [c r]
   (edn/read-string (str r "r" c)))
 
-(defn isLetter [char]
-  (and (= 1 (count (str char)))
-       (not= (str/upper-case char) 
-             (str/lower-case char))))
+(defn isLetter 
+  "Takes either a char or a Unicode code point."
+  [x]
+  (if (int? x)
+    (not= (str/upper-case (char x))
+          (str/lower-case (char x)))
+    (not= (str/upper-case x) 
+          (str/lower-case x))))
 
-(defn isUpperCase [s]
-  (= s (str/upper-case s)))
+(defn isAlphabetic 
+  "Takes a Unicode code point."
+  [int]
+  (not= (str/upper-case (.fromCharCode js/String int))
+        (str/lower-case (.fromCharCode js/String int))))
 
-(defn isLowerCase [s]
-  (= s (str/lower-case s)))
+(defn isUpperCase 
+  "Takes either a char or a Unicode code point."
+  [x]
+  (if (int? x)
+    (and (isLetter (.fromCharCode js/String x))
+         (= (.fromCharCode js/String x) 
+            (str/upper-case (.fromCharCode js/String x))))
+    (and (isLetter (.fromCharCode js/String x))
+         (= x (str/upper-case x)))))
+
+(defn isLowerCase 
+  "Takes either a char or a Unicode code point."
+  [x]
+    (if (int? x)
+      (and (isLetter (.fromCharCode js/String x))
+           (= (.fromCharCode js/String x)
+              (str/lower-case (.fromCharCode js/String x))))
+      (and (isLetter x)
+          (= x (str/lower-case x)))))
 
 (defn isISOControl [char]
   (boolean (re-seq #"[\u0000-\u001F\u007F-\u009F]" char)))

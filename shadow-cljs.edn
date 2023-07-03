@@ -9,6 +9,7 @@
                              context lang-clojure-eval.main/context
                              isISOControl lang-clojure-eval.character/isISOControl
                              isLetter lang-clojure-eval.character/isLetter
+                             isAlphabetic lang-clojure-eval.character/isAlphabetic
                              isUpperCase lang-clojure-eval.character/isUpperCase
                              isLowerCase lang-clojure-eval.character/isLowerCase
                              digit lang-clojure-eval.character/digit
