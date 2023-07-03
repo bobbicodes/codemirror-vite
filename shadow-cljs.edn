@@ -4,11 +4,13 @@
  :builds
  {:sci
   {:target :esm
-   :output-dir "public/js"
+   :output-dir "src"
    :modules {:sci {:exports {evalString lang-clojure-eval.main/eval-string
                              context lang-clojure-eval.main/context
                              isISOControl lang-clojure-eval.character/isISOControl
                              isLetter lang-clojure-eval.character/isLetter
+                             isUpperCase lang-clojure-eval.character/isUpperCase
+                             isLowerCase lang-clojure-eval.character/isLowerCase
                              digit lang-clojure-eval.character/digit
                              ;; parseInt causes ReferenceError if exported,
                              ;; but somehow works if it's not... why?

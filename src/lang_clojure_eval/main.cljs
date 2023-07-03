@@ -15,7 +15,9 @@
                           'lang-clojure-eval.character
                           {'digit char/digit
                            'isISOControl char/isISOControl
-                           'isLetter char/isLetter}
+                           'isLetter char/isLetter
+                           'isLowerCase char/isLowerCase
+                           'isUpperCase char/isUpperCase}
                           'lang-clojure-eval.integer
                           {'parseInt int/parse-int}}}))
 
