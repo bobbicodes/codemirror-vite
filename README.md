@@ -23,6 +23,10 @@ highlighting and indentation information.</p>
 </dd>
 </dl>
 
+## Java interop
+
+Since many commonly used Java methods are not accessible because we are in a JavaScript environment, a limited subset have been ported into Clojure for compatibility. If you'd like to use one that has not been ported, please file an issue and we'll see what we can do.
+
 ## Status
 
 Alpha. Certainly contains bugs. There is a [live demo](https://bobbicodes.github.io/lang-clojure-eval/) running which is continuously built from the main branch.
