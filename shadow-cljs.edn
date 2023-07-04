@@ -10,8 +10,11 @@
                              isISOControl lang-clojure-eval.character/isISOControl
                              isLetter lang-clojure-eval.character/isLetter
                              isAlphabetic lang-clojure-eval.character/isAlphabetic
+                              isSpace lang-clojure-eval.character/isSpace
                              isUpperCase lang-clojure-eval.character/isUpperCase
                              isLowerCase lang-clojure-eval.character/isLowerCase
+                             toUpperCase lang-clojure-eval.character/toUpperCase
+                             toLowerCase lang-clojure-eval.character/toLowerCase
                              digit lang-clojure-eval.character/digit
                              ;; parseInt causes ReferenceError if exported,
                              ;; but somehow works if it's not... why?

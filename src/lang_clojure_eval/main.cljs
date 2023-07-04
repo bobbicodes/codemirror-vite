@@ -18,6 +18,9 @@
                            'isLetter char/isLetter
                            'isAlphabetic char/isAlphabetic
                            'isLowerCase char/isLowerCase
+                           'toUpperCase char/toUpperCase
+                           'toLowerCase char/toLowerCase
+                           'isSpace char/isSpace
                            'isUpperCase char/isUpperCase}
                           'lang-clojure-eval.integer
                           {'parseInt int/parse-int}}}))

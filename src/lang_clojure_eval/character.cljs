@@ -27,7 +27,7 @@
     (and (isLetter (.fromCharCode js/String x))
          (= (.fromCharCode js/String x) 
             (str/upper-case (.fromCharCode js/String x))))
-    (and (isLetter (.fromCharCode js/String x))
+    (and (isLetter x)
          (= x (str/upper-case x)))))
 
 (defn isLowerCase 
@@ -39,6 +39,15 @@
               (str/lower-case (.fromCharCode js/String x))))
       (and (isLetter x)
           (= x (str/lower-case x)))))
+
+(defn toUpperCase [s]
+  (str/upper-case s))
+
+(defn toLowerCase [s]
+  (str/lower-case s))
+
+(defn isSpace [c]
+  (boolean (re-find #"\s" (str c))))
 
 (defn isISOControl [char]
   (boolean (re-seq #"[\u0000-\u001F\u007F-\u009F]" char)))
