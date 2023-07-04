@@ -72,7 +72,15 @@ export function tryEval(s) {
       }
 }
 
+export const clearEval = (view) => {
+    if (evalResult.length != 0) {
+        evalResult = ""
+        updateEditor(view, codeBeforeEval, posBeforeEval)
+    }
+}
+
 export const evalAtCursor = (view) => {
+    clearEval(view)
     const doc = view.state.doc.toString()
     codeBeforeEval = doc
     posBeforeEval = view.state.selection.main.head
@@ -85,14 +93,8 @@ export const evalAtCursor = (view) => {
     return true
 }
 
-export const clearEval = (view) => {
-    if (evalResult.length != 0) {
-        evalResult = ""
-        updateEditor(view, codeBeforeEval, posBeforeEval)
-    }
-}
-
 export const evalTopLevel = (view) => {
+    clearEval(view)
     posAtFormEnd = topLevelNode(view.state).to
     const doc = view.state.doc.toString()
     posBeforeEval = view.state.selection.main.head
@@ -106,6 +108,7 @@ export const evalTopLevel = (view) => {
 }
 
 export const evalCell = (view) => {
+    clearEval(view)
     const doc = view.state.doc.toString()
     posBeforeEval = view.state.selection.main.head
     evalResult = tryEval(view.state.doc.text.join(" "))
