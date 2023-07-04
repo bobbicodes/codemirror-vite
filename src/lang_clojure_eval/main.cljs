@@ -26,7 +26,12 @@
                           'lang-clojure-eval.integer
                           {'parseInt int/parse-int}}}))
 
-(defn reqs [req-form]
+(defn reqs 
+  "Takes a zipper at a node representing a `:require`
+  form within the namespace declaration.
+  Returns a sequence of the vectors containing the requires.
+  "
+  [req-form]
   (let [first-req (z/down req-form)]
     (loop [z first-req result []]
       (if-not (z/right z)
@@ -39,7 +44,10 @@
 
 (def last-req (atom ""))
 
-(defn eval-string [source]
+(defn eval-string 
+  "Parses the code to be evaluated and finds the namespace declaration
+  if there is one, extracts the requires and loads them in the env."
+  [source]
   (let [ns-name (z/next (z/find-next-value (z/of-string source) z/next 'ns))
         req-form (z/right ns-name)
         reqs (str "(ns " (or (current-ns source) "lang-clojure-eval")
