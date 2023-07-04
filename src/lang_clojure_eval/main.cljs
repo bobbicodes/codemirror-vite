@@ -26,18 +26,33 @@
                           'lang-clojure-eval.integer
                           {'parseInt int/parse-int}}}))
 
+(defn reqs [req-form]
+  (let [first-req (z/down req-form)]
+    (loop [z first-req result []]
+      (if-not (z/right z)
+        result
+        (recur (z/right z) 
+               (conj result (z/sexpr (z/right z))))))))
+
 (defn current-ns [source]
   (z/sexpr (z/next (z/find-next-value (z/of-string source) z/next 'ns))))
 
+(def last-req (atom ""))
+
 (defn eval-string [source]
-  (let [reqs (str "(ns " (or (current-ns source) "lang-clojure-eval")
-                  "(:require [lang-clojure-eval.character :as Character]
-                       [lang-clojure-eval.integer :as Integer]))
+  (let [ns-name (z/next (z/find-next-value (z/of-string source) z/next 'ns))
+        req-form (z/right ns-name)
+        reqs (str "(ns " (or (current-ns source) "lang-clojure-eval")
+                  "\n  (:require [lang-clojure-eval.character :as Character]
+        [lang-clojure-eval.integer :as Integer] "
+               (apply str (interpose "\n" (reqs req-form))) "))
               (defn int [x]
                 (if (.isInteger js/Number (js/parseInt x))
                     (js/parseInt x)
                     (.charCodeAt x 0)))")]
+    (when (or req-form
+              (and ns-name (nil? req-form))) (reset! last-req reqs))
     (try (binding [*print-length* 100]
-           (with-out-str (pprint/pprint (sci/eval-string* context (str reqs source)))))
+           (with-out-str (pprint/pprint (sci/eval-string* context (str @last-req source)))))
          (catch :default e
            (with-out-str (error-handler source e))))))
