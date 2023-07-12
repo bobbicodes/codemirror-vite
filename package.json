@@ -1,18 +1,18 @@
 {
   "name": "lang-clojure-eval",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "author": "Bobbi Towers <btowers793@gmail.com>",
   "description": "Lezer-based Clojure Codemirror 6 extension with live evaluation",
-  "main": "dist/index.cjs",
+  "main": "dist/assets/index-a562dec2.js",
   "type": "module",
   "files": [
     "dist"
   ],
   "exports": {
-    "import": "./dist/index.es.js",
-    "require": "./dist/index.cjs"
+    "import": "./dist/assets/index-a562dec2.js",
+    "require": "./dist/assets/index-a562dec2.js"
   },
-  "module": "dist/index.es.js",
+  "module": "dist/assets/index-a562dec2.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
