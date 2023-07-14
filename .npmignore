@@ -1,0 +1,15 @@
+/.clj-kondo
+/.github
+/src
+/test
+/node_modules
+/demo
+index.html
+vite.config.js
+shadow-cljs.edn
+deps.edn
+design-notes.md
+.shadow-cljs
+.calva
+.cpcache
+.lsp
